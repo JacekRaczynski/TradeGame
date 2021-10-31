@@ -3,6 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 /[Ll]ibrary/
+/[Ll]ibrary/Bee/
 /[Tt]emp/
 /[Oo]bj/
 /[Bb]uild/
@@ -48,6 +49,7 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
+*.log
 
 # Unity3D generated meta files
 *.pidb.meta
@@ -79,3 +81,6 @@ API
 Training
 Blog
 About
+New Unity Project/Library/LastSceneManagerSetup.txt
+New Unity Project/Temp/UnityLockfile
+New Unity Project/Library/expandedItems
