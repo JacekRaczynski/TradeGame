@@ -14,8 +14,11 @@ public class PlayerControllerLevel1 : PlayerController
     private bool isFacingRight = true;
     public bool canDoubleJump = false;
     public bool isGround = true;
+    public bool isWalking = false;
     public LayerMask groundLayer;
     public Animator animator;
+
+
    
 
 
@@ -36,39 +39,54 @@ public class PlayerControllerLevel1 : PlayerController
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("----------" + IsGrounded());
+        animator.SetBool("isGround", isGround);
+        animator.SetBool("isWalking", isWalking);
         if (IsGrounded())
         {
             isGround = true;
             canDoubleJump= false;
+            animator.SetBool("isGround", true);
         }
         if (GameManager.instance.currentGameState == GameManager.GameState.GS_GAME)
         {
-            if (Input.GetKey(KeyCode.RightArrow))
+            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+                isWalking = false;
+            else
             {
-                isMovingRight = true;
-                if (!isFacingRight)
-                    flip();
-                transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
-             
-            }
-            if (Input.GetKey(KeyCode.LeftArrow))
-            {
-                isMovingRight = false;
-                if (isFacingRight)
-                    flip();
-                transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    isMovingRight = true;
+                    if (!isFacingRight)
+                        flip();
+                    transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
+                    isWalking = true;
+                }
+                if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    isMovingRight = false;
+                    if (isFacingRight)
+                        flip();
+                    transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
+                    isWalking = true;
+                }
             }
             if (Input.GetMouseButtonDown(0))
             {
-                if (!isGround && canDoubleJump) DoubleJump();
-              
+                Debug.Log("Try to jump"+ isGround + canDoubleJump);
+                if (!isGround && canDoubleJump)
+                {
+                    DoubleJump();
+                    Debug.Log("Two jump");
+                }
                 if (isGround && !canDoubleJump)
                 {
+                    Debug.Log("One jump");
                     rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                     canDoubleJump = true;
-                        isGround = false;
-                    }
-           
+                    isGround = false;
+                }
+
             }
 
         }
@@ -79,6 +97,7 @@ public class PlayerControllerLevel1 : PlayerController
         if (other.CompareTag("Coin"))
         {
             GameManager.instance.addCoins();
+            Debug.Log("DDDDDDDDDDD");
             other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("Heart"))
@@ -89,7 +108,7 @@ public class PlayerControllerLevel1 : PlayerController
     }
     private bool IsGrounded()
     {
-        return Physics.Raycast(this.transform.position, Vector3.down, 0.1f, groundLayer.value);
+        return Physics.Raycast(this.transform.position, Vector3.down, 0.2f, groundLayer.value);
     }
     private void DoubleJump()
     {
@@ -102,9 +121,11 @@ public class PlayerControllerLevel1 : PlayerController
     private void flip()
     {
         isFacingRight = !isFacingRight;
-        Vector3 theScale = transform.localScale;
-        theScale.z *= -1;
-        transform.localScale = theScale;
+        Quaternion theScale = transform.localRotation;
+
+        theScale = Quaternion.AngleAxis(180, Vector3.up) * theScale;
+        //     theScale.y *= -1;
+        transform.localRotation = theScale;
     }
 
 
