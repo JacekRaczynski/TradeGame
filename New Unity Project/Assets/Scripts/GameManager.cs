@@ -19,12 +19,26 @@ public class GameManager : MonoBehaviour
     public Canvas menuCanvas;
     [SerializeField]
     private TMPro.TextMeshProUGUI coinsText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI timesText;
     private int coins = 0;
-    private int lives = 0;
+    private int lives = 3;
+    private int keys = 0;
+    [SerializeField]
+    private Image[] keysTab;
+    [SerializeField]
+    private Image[] livesTab;
+
+    private float timer = 0;
 
     void Start()
     {
-       
+        for (int i = keys; i < keysTab.Length; i++)
+            keysTab[i].color = Color.grey;
+        for (int i = 0; i < lives; i++)
+            livesTab[i].enabled = true;
+        for (int i = lives; i < livesTab.Length; i++)
+            livesTab[i].enabled = false;
     }
 
     private void Awake()
@@ -41,6 +55,12 @@ public class GameManager : MonoBehaviour
             if (Input.GetKey(KeyCode.S))
                 InGame();
         }
+        if (currentGameState == GameState.GS_GAME)
+        {
+            timer += Time.deltaTime;
+            timesText.text = string.Format("{00:00}:{1:00}", (int)(timer / 59), timer % 59);
+
+        }
     }
 
     public void addCoins()
@@ -51,6 +71,10 @@ public class GameManager : MonoBehaviour
     public void addLives()
     {
         lives++;
+    }
+    public void addKeys()
+    {
+        keysTab[keys++].color = Color.white;
     }
     public void subTractLives()
     {

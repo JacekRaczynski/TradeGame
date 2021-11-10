@@ -1,6 +1,8 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Camera
+    - FreeFlyCamera
     - GameManager
     - PlayerControllerLevel1
     Unity.Rider.Editor.dll:
@@ -55,11 +57,15 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
+    - Class: 74
+      Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 90
+      Script: {instanceID: 0}
+    - Class: 91
       Script: {instanceID: 0}
     - Class: 95
       Script: {instanceID: 0}
@@ -68,29 +74,33 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1514}
+      Script: {instanceID: 1540}
     - Class: 114
-      Script: {instanceID: 2056}
+      Script: {instanceID: 2082}
     - Class: 114
-      Script: {instanceID: 2450}
+      Script: {instanceID: 2476}
     - Class: 114
-      Script: {instanceID: 2646}
+      Script: {instanceID: 2672}
     - Class: 114
-      Script: {instanceID: 3842}
+      Script: {instanceID: 3098}
     - Class: 114
-      Script: {instanceID: 4076}
+      Script: {instanceID: 3870}
     - Class: 114
-      Script: {instanceID: 4722}
+      Script: {instanceID: 4104}
     - Class: 114
-      Script: {instanceID: 5248}
+      Script: {instanceID: 4750}
     - Class: 114
-      Script: {instanceID: 5394}
+      Script: {instanceID: 5276}
     - Class: 114
-      Script: {instanceID: 5696}
+      Script: {instanceID: 5422}
     - Class: 114
-      Script: {instanceID: 7014}
+      Script: {instanceID: 5724}
     - Class: 114
-      Script: {instanceID: 22688}
+      Script: {instanceID: 7042}
+    - Class: 114
+      Script: {instanceID: 52450}
+    - Class: 114
+      Script: {instanceID: 54158}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -360,6 +370,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: ContentSizeFitter
+  - hash:
+      serializedVersion: 2
+      Hash: 1f3a4d1672728d9299d7cc243ea647c8
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameManager
   - hash:
       serializedVersion: 2
       Hash: 2574ac7d50617d23cdefe4ad22f5e1ad
@@ -848,7 +864,7 @@ ScriptsOnlyBuild:
     className: StateMachine
   - hash:
       serializedVersion: 2
-      Hash: 30f3213a6e218a461fa00e428f22d3eb
+      Hash: c75efb3a65bdf462423e25bf482d29ec
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PlayerControllerLevel1
@@ -896,11 +912,23 @@ ScriptsOnlyBuild:
     className: UnityOnSliderValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 1f3a4d1672728d9299d7cc243ea647c8
+      Hash: 81e982f2c5b68cf6f36e9b6e995514c0
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
-    className: GameManager
+    className: ToggleGameObjectEnable
+  - hash:
+      serializedVersion: 2
+      Hash: 32ff4b5156576f1537648eb60fd067d9
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: FreeFlyCamera
+  - hash:
+      serializedVersion: 2
+      Hash: 9425e03d79b8956cc3ce42b091c72e7b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Camera
   platform: 13
   scenePathNames:
   - Assets/Scenes/SampleScene.unity
-  playerPath: D:/Buildy pracy inz/build2.apk
+  playerPath: D:/Buildy pracy inz/build3.apk

@@ -39,7 +39,6 @@ public class PlayerControllerLevel1 : PlayerController
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("----------" + IsGrounded());
         animator.SetBool("isGround", isGround);
         animator.SetBool("isWalking", isWalking);
         if (IsGrounded())
@@ -73,18 +72,15 @@ public class PlayerControllerLevel1 : PlayerController
             }
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("Try to jump"+ isGround + canDoubleJump);
                 if (!isGround && canDoubleJump)
                 {
                     DoubleJump();
-                    Debug.Log("Two jump");
                 }
                 if (isGround && !canDoubleJump)
                 {
-                    Debug.Log("One jump");
                     rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                     canDoubleJump = true;
-                    isGround = false;
+                    isGround = IsGrounded();
                 }
 
             }
@@ -97,12 +93,16 @@ public class PlayerControllerLevel1 : PlayerController
         if (other.CompareTag("Coin"))
         {
             GameManager.instance.addCoins();
-            Debug.Log("DDDDDDDDDDD");
             other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("Heart"))
         {
             GameManager.instance.addLives();
+            other.gameObject.SetActive(false);
+        }
+        else if (other.CompareTag("Key"))
+        {
+            GameManager.instance.addKeys();
             other.gameObject.SetActive(false);
         }
     }
