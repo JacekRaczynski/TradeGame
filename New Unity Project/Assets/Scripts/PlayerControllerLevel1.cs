@@ -102,10 +102,20 @@ public class PlayerControllerLevel1 : PlayerController
         }
         else if (other.CompareTag("Key"))
         {
+            Debug.Log("XXXX");
             GameManager.instance.addKeys();
             other.gameObject.SetActive(false);
         }
+        else if (other.CompareTag("Exit"))
+        {
+        if(GameManager.instance.keysCompleted)
+            {
+                GameManager.instance.LevelCompleted();
+            }
+        }
+
     }
+
     private bool IsGrounded()
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.2f, groundLayer.value);

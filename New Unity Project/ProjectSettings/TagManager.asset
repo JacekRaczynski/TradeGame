@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Coin
   - Heart
+  - Key
+  - Exit
   layers:
   - Default
   - TransparentFX

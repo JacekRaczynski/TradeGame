@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public Canvas inGameCanvas;
     public Canvas menuCanvas;
+    public Canvas pauseCanvas;
+    public Canvas levelCompletedCanvas;
     [SerializeField]
     private TMPro.TextMeshProUGUI coinsText;
     [SerializeField]
@@ -24,13 +27,15 @@ public class GameManager : MonoBehaviour
     private int coins = 0;
     private int lives = 3;
     private int keys = 0;
+    private int maxKey = 3;
+    public bool keysCompleted;
     [SerializeField]
     private Image[] keysTab;
     [SerializeField]
     private Image[] livesTab;
 
     private float timer = 0;
-
+    public bool asda = false;
     void Start()
     {
         for (int i = keys; i < keysTab.Length; i++)
@@ -44,7 +49,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         instance = this;
-
+        InGame();
     }
 
     // Update is called once per frame
@@ -52,11 +57,13 @@ public class GameManager : MonoBehaviour
     {
         if (currentGameState == GameState.GS_PAUSEMENU)
         {
-            if (Input.GetKey(KeyCode.S))
+            if (Input.GetKeyDown(KeyCode.Escape))
                 InGame();
         }
         if (currentGameState == GameState.GS_GAME)
         {
+            if (Input.GetKeyDown(KeyCode.Escape))
+                PauseMenu();
             timer += Time.deltaTime;
             timesText.text = string.Format("{00:00}:{1:00}", (int)(timer / 59), timer % 59);
 
@@ -75,6 +82,7 @@ public class GameManager : MonoBehaviour
     public void addKeys()
     {
         keysTab[keys++].color = Color.white;
+        if (keys == keysTab.Length) keysCompleted = true;
     }
     public void subTractLives()
     {
@@ -84,7 +92,9 @@ public class GameManager : MonoBehaviour
     void SetGameState(GameState newGameState)
     {
         currentGameState = newGameState;
-        inGameCanvas.enabled = (newGameState == GameState.GS_GAME);
+        inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
+        pauseCanvas.enabled = (currentGameState == GameState.GS_PAUSEMENU);
+        levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVELCOMPLETED);
     }    
 
     public void InGame()
@@ -104,4 +114,23 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.GS_LEVELCOMPLETED);
     }
+
+    public void OnResumeButtonClick()
+    {
+        InGame();
+    }
+    public void OnRestartButtonClicked()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void OnNextLevelButtonClicked()
+    {
+        SceneManager.LoadScene("Level 2");
+    }
+
+    public void OnExitButtonClicked()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }

@@ -324,6 +324,7 @@
 "Assets/Package/FreeFlyCamera/Scripts/FreeFlyCamera.cs"
 "Assets/Scripts/Camera.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PlayerControllerLevel1.cs"
 -langversion:8.0
