@@ -18,6 +18,8 @@ public class PlayerControllerLevel1 : PlayerController
     public LayerMask groundLayer;
     public Animator animator;
 
+    private bool leftClicked;
+    private bool rightClicked;
 
    
 
@@ -49,11 +51,11 @@ public class PlayerControllerLevel1 : PlayerController
         }
         if (GameManager.instance.currentGameState == GameManager.GameState.GS_GAME)
         {
-            if (!Input.GetKey(KeyCode.RightArrow) && !Input.GetKey(KeyCode.LeftArrow))
+            if (!rightClicked && !leftClicked)
                 isWalking = false;
             else
             {
-                if (Input.GetKey(KeyCode.RightArrow))
+                if (Input.GetKey(KeyCode.RightArrow) || rightClicked)
                 {
                     isMovingRight = true;
                     if (!isFacingRight)
@@ -61,7 +63,7 @@ public class PlayerControllerLevel1 : PlayerController
                     transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
                     isWalking = true;
                 }
-                if (Input.GetKey(KeyCode.LeftArrow))
+                if (Input.GetKey(KeyCode.LeftArrow) || leftClicked)
                 {
                     isMovingRight = false;
                     if (isFacingRight)
@@ -70,20 +72,7 @@ public class PlayerControllerLevel1 : PlayerController
                     isWalking = true;
                 }
             }
-            if (Input.GetMouseButtonDown(0))
-            {
-                if (!isGround && canDoubleJump)
-                {
-                    DoubleJump();
-                }
-                if (isGround && !canDoubleJump)
-                {
-                    rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                    canDoubleJump = true;
-                    isGround = IsGrounded();
-                }
-
-            }
+           
 
         }
     }
@@ -102,7 +91,6 @@ public class PlayerControllerLevel1 : PlayerController
         }
         else if (other.CompareTag("Key"))
         {
-            Debug.Log("XXXX");
             GameManager.instance.addKeys();
             other.gameObject.SetActive(false);
         }
@@ -115,7 +103,22 @@ public class PlayerControllerLevel1 : PlayerController
         }
 
     }
+    public void Jump()
+    {
+        {
+            if (!isGround && canDoubleJump)
+            {
+                DoubleJump();
+            }
+            if (isGround && !canDoubleJump)
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                canDoubleJump = true;
+                isGround = IsGrounded();
+            }
 
+        }
+    }
     private bool IsGrounded()
     {
         return Physics.Raycast(this.transform.position, Vector3.down, 0.2f, groundLayer.value);
@@ -138,6 +141,16 @@ public class PlayerControllerLevel1 : PlayerController
         transform.localRotation = theScale;
     }
 
+    public void setLeftClicked(bool clicked)
+    {
+        Debug.Log("Left " + clicked);
+        leftClicked = clicked;
+    }
+    public void setRightClicked(bool clicked)
+    {
+        Debug.Log("right " + clicked);
+        rightClicked = clicked;
+    }
 
 
 }

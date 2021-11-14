@@ -24,6 +24,10 @@ public class GameManager : MonoBehaviour
     private TMPro.TextMeshProUGUI coinsText;
     [SerializeField]
     private TMPro.TextMeshProUGUI timesText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI highScoreText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI ScoreText;
     private int coins = 0;
     private int lives = 3;
     private int keys = 0;
@@ -33,6 +37,8 @@ public class GameManager : MonoBehaviour
     private Image[] keysTab;
     [SerializeField]
     private Image[] livesTab;
+
+
 
     private float timer = 0;
     public bool asda = false;
@@ -50,6 +56,8 @@ public class GameManager : MonoBehaviour
     {
         instance = this;
         InGame();
+        if (!PlayerPrefs.HasKey("HighscoreLevel1"))
+            PlayerPrefs.SetInt("HighscoreLevel1", 0);
     }
 
     // Update is called once per frame
@@ -95,6 +103,18 @@ public class GameManager : MonoBehaviour
         inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
         pauseCanvas.enabled = (currentGameState == GameState.GS_PAUSEMENU);
         levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVELCOMPLETED);
+        if(currentGameState == GameState.GS_LEVELCOMPLETED)
+        {
+            Scene currentScene = SceneManager.GetActiveScene();
+            if(currentScene.name == "Level1")
+            {
+                int score = 100;
+                if(score> PlayerPrefs.GetInt("HighscoreLevel1"))
+                    PlayerPrefs.SetInt("HighscoreLevel1", score);
+                highScoreText.text = "Highscore:" + PlayerPrefs.GetInt("HighscoreLevel1");
+                ScoreText.text = "score:" + score;
+            }
+        }
     }    
 
     public void InGame()

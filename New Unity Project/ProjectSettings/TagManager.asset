@@ -8,6 +8,7 @@ TagManager:
   - Heart
   - Key
   - Exit
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
