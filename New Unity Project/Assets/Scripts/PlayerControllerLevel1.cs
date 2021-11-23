@@ -41,6 +41,7 @@ public class PlayerControllerLevel1 : PlayerController
     // Update is called once per frame
     void Update()
     {
+       Debug.Log( PlayerPrefs.GetInt("Control", 6));
         animator.SetBool("isGround", isGround);
         animator.SetBool("isWalking", isWalking);
         if (IsGrounded())

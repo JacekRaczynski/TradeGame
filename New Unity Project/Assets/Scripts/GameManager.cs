@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     public Canvas menuCanvas;
     public Canvas pauseCanvas;
     public Canvas levelCompletedCanvas;
+    public Canvas settingsCanvas;
     [SerializeField]
     private TMPro.TextMeshProUGUI coinsText;
     [SerializeField]
@@ -129,7 +130,7 @@ public class GameManager : MonoBehaviour
     {
         SetGameState(GameState.GS_PAUSEMENU);
     }
-
+  
     public void LevelCompleted()
     {
         SetGameState(GameState.GS_LEVELCOMPLETED);
