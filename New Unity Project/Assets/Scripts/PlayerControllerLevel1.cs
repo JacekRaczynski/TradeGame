@@ -14,12 +14,16 @@ public class PlayerControllerLevel1 : PlayerController
     private bool isFacingRight = true;
     public bool canDoubleJump = false;
     public bool isGround = true;
-    public bool isWalking = false;
+    public bool isWalking = true;
     public LayerMask groundLayer;
     public Animator animator;
+    [SerializeField]
+    public JoystickClickTracker joystick;
 
     private bool leftClicked;
     private bool rightClicked;
+
+ 
 
    
 
@@ -41,7 +45,6 @@ public class PlayerControllerLevel1 : PlayerController
     // Update is called once per frame
     void Update()
     {
-       Debug.Log( PlayerPrefs.GetInt("Control", 6));
         animator.SetBool("isGround", isGround);
         animator.SetBool("isWalking", isWalking);
         if (IsGrounded())
@@ -52,29 +55,58 @@ public class PlayerControllerLevel1 : PlayerController
         }
         if (GameManager.instance.currentGameState == GameManager.GameState.GS_GAME)
         {
-            if (!rightClicked && !leftClicked)
-                isWalking = false;
-            else
-            {
-                if (Input.GetKey(KeyCode.RightArrow) || rightClicked)
+                switch (PlayerPrefs.GetInt("Control", 0))
                 {
-                    isMovingRight = true;
-                    if (!isFacingRight)
-                        flip();
-                    transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
-                    isWalking = true;
-                }
-                if (Input.GetKey(KeyCode.LeftArrow) || leftClicked)
-                {
-                    isMovingRight = false;
-                    if (isFacingRight)
-                        flip();
-                    transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
-                    isWalking = true;
-                }
-            }
-           
+                    case 0:
+                        {
+                        if (!rightClicked && !leftClicked)
+                            isWalking = false;
+                        else
+                        {
+                            if (Input.GetKey(KeyCode.RightArrow) || rightClicked)
+                            {
+                                isMovingRight = true;
+                                if (!isFacingRight)
+                                    flip();
+                                transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
+                                isWalking = true;
+                            }
+                            if (Input.GetKey(KeyCode.LeftArrow) || leftClicked)
+                            {
+                                isMovingRight = false;
+                                if (isFacingRight)
+                                    flip();
+                                transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
+                                isWalking = true;
+                            }
+                        }
+                            break;
+                        }
+                    case 1:
+                        {
+                        if (joystick.GetInputAxis().x >= .025f)
+                        {
+                            isMovingRight = true;
+                            if (!isFacingRight)
+                                flip();
+                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 25, Space.World);
+                            isWalking = true;
+                        }
+                        else if (joystick.GetInputAxis().x <= -.025f)
+                        {
+                            isMovingRight = false;
+                            if (isFacingRight)
+                                flip();
+                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 25, Space.World);
+                            isWalking = true;
+                        }
+                        else{
+                            isWalking = false;
+                        }
+                            break;
+                        }
 
+                }
         }
     }
 

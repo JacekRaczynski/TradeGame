@@ -51,6 +51,15 @@ public class GameManager : MonoBehaviour
             livesTab[i].enabled = true;
         for (int i = lives; i < livesTab.Length; i++)
             livesTab[i].enabled = false;
+        if (PlayerPrefs.GetInt("Control", 0) == 0)
+        {
+            GameObject.Find("ControlArrows").active = true;
+            GameObject.Find("ControlJoystick").active = false;
+        } else if (PlayerPrefs.GetInt("Control", 0) == 1)
+        {
+            GameObject.Find("ControlArrows").active = false;
+            GameObject.Find("ControlJoystick").active = true;
+        }
     }
 
     private void Awake()

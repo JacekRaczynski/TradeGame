@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
@@ -10,10 +11,16 @@ public class MainMenu : MonoBehaviour
     public Canvas settingsCanvas;
     public Canvas controlCanvas;
     public TMP_Dropdown dropDown;
+    public Image imageControlArrows;
+    public Image imageControlJoystick;
+    public TMPro.TextMeshProUGUI textSelectedControl;
+
     private void Start()
     {
+        selectControl();
         settingsCanvas.enabled = false;
         controlCanvas.enabled = false;
+        dropDown.onValueChanged.AddListener(delegate { selectControl(); });
     }
     public IEnumerator StartGame(string levelName)
     {
@@ -38,6 +45,18 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("Control", dropDown.value);
 
+             if (dropDown.value == 0)
+             {
+                imageControlArrows.enabled = true;
+                imageControlJoystick.enabled = false;
+                textSelectedControl.text = dropDown.options[0].text;
+            }
+            else if (dropDown.value == 1)
+            {
+                imageControlArrows.enabled = false;
+                imageControlJoystick.enabled = true;
+                textSelectedControl.text = dropDown.options[1].text;
+            }
     }
 
     public void onLevelButton2Pressed()
@@ -53,8 +72,5 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    void Update()
-    {
-        
-    }
+
 }
