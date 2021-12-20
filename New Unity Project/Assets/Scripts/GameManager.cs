@@ -22,17 +22,32 @@ public class GameManager : MonoBehaviour
     public Canvas levelCompletedCanvas;
     public Canvas settingsCanvas;
     [SerializeField]
-    private TMPro.TextMeshProUGUI coinsText;
+    private TMPro.TextMeshProUGUI coinsText;  // during gamne (BronzeCoin)
     [SerializeField]
-    private TMPro.TextMeshProUGUI timesText;
+    private TMPro.TextMeshProUGUI timesText; //during game
     [SerializeField]
-    private TMPro.TextMeshProUGUI highScoreText;
+    private TMPro.TextMeshProUGUI highScoreText; //highest score on this lvl
     [SerializeField]
-    private TMPro.TextMeshProUGUI ScoreText;
-    private int coins = 0;
+    private TMPro.TextMeshProUGUI ScoreText; //score by lvl
+
+    private int coinBronze = 0;
+    private int coinSilver = 0;
+    private int coinGold = 0;
     private int lives = 3;
     private int keys = 0;
     private int maxKey = 3;
+    private string nick;
+    private int generalBronzeCoins;
+    private int generalSilverCoins;
+    private int generalGoldCoins;
+    private int levelPlayer;
+    private bool[] levelUnclocked = new bool[levelNumber];
+    private float[] time = new float[levelNumber];
+    private int[] controlSelected = new int[levelNumber];
+    private int[] highestScore = new int[levelNumber];
+
+
+    public static int levelNumber = 10;
     public bool keysCompleted;
     [SerializeField]
     private Image[] keysTab;
@@ -42,7 +57,6 @@ public class GameManager : MonoBehaviour
 
 
     private float timer = 0;
-    public bool asda = false;
     void Start()
     {
         for (int i = keys; i < keysTab.Length; i++)
@@ -88,10 +102,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void addCoins()
+    public void addBronzeCoin()
     {
-        coins++;
-        coinsText.text = coins.ToString();
+        coinBronze++;
+        coinsText.text = coinBronze.ToString();
+    }
+    public void addSilverCoin()
+    {
+        coinSilver++;
+
+    }
+    public void addGoldCoin()
+    {
+        coinGold ++;
     }
     public void addLives()
     {
@@ -106,7 +129,58 @@ public class GameManager : MonoBehaviour
     {
         lives--;
     }
-    
+    public void setData(int bronzeCoin, int silverCoin, int goldCoin, int levelPlayer, bool[] levelCompleted, float[] time, string nick,int[] controlSelected, int[] highestScore)
+    {
+        this.generalBronzeCoins = bronzeCoin;
+        this.generalSilverCoins = silverCoin;
+        this.generalGoldCoins = goldCoin;
+        this.levelPlayer = levelPlayer;
+        this.levelUnclocked = levelCompleted;
+        this.time = time;
+        this.nick = nick;
+        this.controlSelected = controlSelected;
+        this.highestScore = highestScore;
+}
+
+    public int getGeneralBronzeCoins()
+    {
+        return generalBronzeCoins;
+    }   
+    public int getGeneralSilverCoins()
+    {
+        return generalSilverCoins;
+    }   
+    public int getGeneralGoldCoins()
+    {
+        return generalGoldCoins;
+    }
+    public int getlevelPlayer()
+    {
+        return levelPlayer;
+    }
+    public bool[] getlevelUnclockedPlayer()
+    {
+        return levelUnclocked;
+    }
+    public float[] getTime()
+    {
+        return time;
+    }
+    public string getNick()
+    { 
+        return nick;
+    }
+    public int[] getControlerSelected()
+    {
+        return controlSelected;
+    }
+    public int[] getHighestScore()
+    {
+        return highestScore;
+    }
+
+
+
     void SetGameState(GameState newGameState)
     {
         currentGameState = newGameState;
@@ -143,6 +217,12 @@ public class GameManager : MonoBehaviour
     public void LevelCompleted()
     {
         SetGameState(GameState.GS_LEVELCOMPLETED);
+        generalBronzeCoins += coinBronze;
+        generalSilverCoins += coinSilver;
+        generalGoldCoins += coinGold;
+  
+    Debug.Log(this.generalBronzeCoins + this.generalSilverCoins + this.generalGoldCoins);
+        SaveSystem.SavePlayer(this);
     }
 
     public void OnResumeButtonClick()

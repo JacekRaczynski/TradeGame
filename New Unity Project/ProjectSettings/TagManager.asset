@@ -8,7 +8,10 @@ TagManager:
   - Heart
   - Key
   - Exit
-  - MovingPlatform
+  - CoinBronze
+  - CoinSilver
+  - CoinGold
+  - Kill
   layers:
   - Default
   - TransparentFX

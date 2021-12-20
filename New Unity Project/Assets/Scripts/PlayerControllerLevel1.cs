@@ -19,18 +19,18 @@ public class PlayerControllerLevel1 : PlayerController
     public Animator animator;
     [SerializeField]
     public JoystickClickTracker joystick;
-
+    [SerializeField]
+    private bool isLock;
     private bool leftClicked;
     private bool rightClicked;
-
- 
 
    
 
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
     public float JumpForce { get => jumpForce; set => jumpForce = value; }
-
+    public bool IsLock { get => isLock; }
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +60,12 @@ public class PlayerControllerLevel1 : PlayerController
                     case 0:
                         {
                         if (!rightClicked && !leftClicked)
+                        {
+                        
                             isWalking = false;
+                            isLock = false;
+                        }
+
                         else
                         {
                             if (Input.GetKey(KeyCode.RightArrow) || rightClicked)
@@ -70,6 +75,7 @@ public class PlayerControllerLevel1 : PlayerController
                                     flip();
                                 transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
                                 isWalking = true;
+                                isLock = true;
                             }
                             if (Input.GetKey(KeyCode.LeftArrow) || leftClicked)
                             {
@@ -78,6 +84,8 @@ public class PlayerControllerLevel1 : PlayerController
                                     flip();
                                 transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
                                 isWalking = true;
+                                isLock = true;
+
                             }
                         }
                             break;
@@ -91,6 +99,7 @@ public class PlayerControllerLevel1 : PlayerController
                                 flip();
                             transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 25, Space.World);
                             isWalking = true;
+                            isLock = true;
                         }
                         else if (joystick.GetInputAxis().x <= -.025f)
                         {
@@ -99,9 +108,11 @@ public class PlayerControllerLevel1 : PlayerController
                                 flip();
                             transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 25, Space.World);
                             isWalking = true;
+                            isLock = true;
                         }
                         else{
                             isWalking = false;
+                            isLock = false;
                         }
                             break;
                         }
@@ -114,7 +125,17 @@ public class PlayerControllerLevel1 : PlayerController
     {
         if (other.CompareTag("Coin"))
         {
-            GameManager.instance.addCoins();
+            GameManager.instance.addBronzeCoin();
+            other.gameObject.SetActive(false);
+        }
+        if (other.CompareTag("CoinSilver"))
+        {
+            GameManager.instance.addSilverCoin();
+            other.gameObject.SetActive(false);
+        }
+        if (other.CompareTag("CoinGold"))
+        {
+            GameManager.instance.addGoldCoin();
             other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("Heart"))
@@ -131,6 +152,7 @@ public class PlayerControllerLevel1 : PlayerController
         {
         if(GameManager.instance.keysCompleted)
             {
+
                 GameManager.instance.LevelCompleted();
             }
         }

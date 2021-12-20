@@ -10,16 +10,28 @@ public class MainMenu : MonoBehaviour
     public Canvas mainMenuCanvas;
     public Canvas settingsCanvas;
     public Canvas controlCanvas;
+    public Canvas selectLevelCanvas;
+    public Canvas highestScoreCanvas;
     public TMP_Dropdown dropDown;
     public Image imageControlArrows;
     public Image imageControlJoystick;
     public TMPro.TextMeshProUGUI textSelectedControl;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI generalBronzeCoinsText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI generalSilverCoinsText;
+    [SerializeField]
+    private TMPro.TextMeshProUGUI generalGoldCoinsText;
 
     private void Start()
     {
+        load();
         selectControl();
         settingsCanvas.enabled = false;
         controlCanvas.enabled = false;
+        highestScoreCanvas.enabled = false;
+        selectLevelCanvas.enabled = false;
+        //  Debug.Log("Loaded data from memory/aaaaaa/");// + highestScoreCanvas.enabled + controlCanvas.enabled + highestScoreCanvas.enabled);
         dropDown.onValueChanged.AddListener(delegate { selectControl(); });
     }
     public IEnumerator StartGame(string levelName)
@@ -41,6 +53,16 @@ public class MainMenu : MonoBehaviour
         mainMenuCanvas.enabled = controlCanvas.isActiveAndEnabled;
         controlCanvas.enabled = !controlCanvas.isActiveAndEnabled; 
     }
+    public void showHighestScore()
+    {
+        mainMenuCanvas.enabled = highestScoreCanvas.isActiveAndEnabled;
+        highestScoreCanvas.enabled = !highestScoreCanvas.isActiveAndEnabled;
+    }
+    public void showSelectLevel()
+    {
+        mainMenuCanvas.enabled = selectLevelCanvas.isActiveAndEnabled;
+        selectLevelCanvas.enabled = !selectLevelCanvas.isActiveAndEnabled;
+    }
     public void selectControl()
     {
         PlayerPrefs.SetInt("Control", dropDown.value);
@@ -58,10 +80,26 @@ public class MainMenu : MonoBehaviour
                 textSelectedControl.text = dropDown.options[1].text;
             }
     }
+    public void updateGeneralCoins()
+    {
+        generalBronzeCoinsText.text = GameManager.instance.getGeneralBronzeCoins().ToString();
+        generalSilverCoinsText.text = GameManager.instance.getGeneralSilverCoins().ToString();
+        generalGoldCoinsText.text = GameManager.instance.getGeneralGoldCoins().ToString();
+    }
 
     public void onLevelButton2Pressed()
     {
         StartCoroutine(StartGame("Level2"));
+    }
+    public void load()
+    {
+        SaveSystem.LoadPlayer();
+        updateGeneralCoins();
+    }
+    public void reset()
+    {
+        SaveSystem.resetPlayer();
+        updateGeneralCoins();
     }
     public void OnExit()
     {
