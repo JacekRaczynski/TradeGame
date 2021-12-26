@@ -20,19 +20,34 @@ public class GameManager : MonoBehaviour
     public Canvas menuCanvas;
     public Canvas pauseCanvas;
     public Canvas levelCompletedCanvas;
-    public Canvas settingsCanvas;
+    public Canvas gameOverCanvas;
     [SerializeField]
-    private TMPro.TextMeshProUGUI coinsText;
+    private TMPro.TextMeshProUGUI coinsText;  // during gamne (BronzeCoin)
     [SerializeField]
-    private TMPro.TextMeshProUGUI timesText;
+    private TMPro.TextMeshProUGUI timesText; //during game
     [SerializeField]
-    private TMPro.TextMeshProUGUI highScoreText;
+    private TMPro.TextMeshProUGUI highScoreText; //highest score on this lvl
     [SerializeField]
-    private TMPro.TextMeshProUGUI ScoreText;
-    private int coins = 0;
+    private TMPro.TextMeshProUGUI ScoreText; //score by lvl
+
+    private int coinBronze = 0;
+    private int coinSilver = 0;
+    private int coinGold = 0;
     private int lives = 3;
     private int keys = 0;
     private int maxKey = 3;
+    private string nick;
+    private int generalBronzeCoins;
+    private int generalSilverCoins;
+    private int generalGoldCoins;
+    private int levelPlayer;
+    private bool[] levelUnclocked = new bool[levelNumber];
+    private float[] time = new float[levelNumber];
+    private int[] controlSelected = new int[levelNumber];
+    private int[] highestScore = new int[levelNumber];
+
+
+    public static int levelNumber = 10;
     public bool keysCompleted;
     [SerializeField]
     private Image[] keysTab;
@@ -42,9 +57,9 @@ public class GameManager : MonoBehaviour
 
 
     private float timer = 0;
-    public bool asda = false;
     void Start()
     {
+        SaveSystem.LoadPlayer();
         for (int i = keys; i < keysTab.Length; i++)
             keysTab[i].color = Color.grey;
         for (int i = 0; i < lives; i++)
@@ -61,7 +76,7 @@ public class GameManager : MonoBehaviour
             GameObject.Find("ControlJoystick").active = true;
         }
     }
-
+ 
     private void Awake()
     {
         instance = this;
@@ -88,10 +103,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void addCoins()
+    public void addBronzeCoin()
     {
-        coins++;
-        coinsText.text = coins.ToString();
+        coinBronze++;
+        coinsText.text = coinBronze.ToString();
+    }
+    public void addSilverCoin()
+    {
+        coinSilver++;
+
+    }
+    public void addGoldCoin()
+    {
+        coinGold ++;
     }
     public void addLives()
     {
@@ -104,15 +128,71 @@ public class GameManager : MonoBehaviour
     }
     public void subTractLives()
     {
+        
         lives--;
+        livesTab[lives].enabled = false;
+        if (lives == 0) GameOver();
     }
-    
+    public void setData(int bronzeCoin, int silverCoin, int goldCoin, int levelPlayer, bool[] levelCompleted, float[] time, string nick,int[] controlSelected, int[] highestScore)
+    {
+        Debug.Log("SetData");
+        this.generalBronzeCoins = bronzeCoin;
+        this.generalSilverCoins = silverCoin;
+        this.generalGoldCoins = goldCoin;
+        this.levelPlayer = levelPlayer;
+        this.levelUnclocked = levelCompleted;
+        this.time = time;
+        this.nick = nick;
+        this.controlSelected = controlSelected;
+        this.highestScore = highestScore;
+}
+
+    public int getGeneralBronzeCoins()
+    {
+        return generalBronzeCoins;
+    }   
+    public int getGeneralSilverCoins()
+    {
+        return generalSilverCoins;
+    }   
+    public int getGeneralGoldCoins()
+    {
+        return generalGoldCoins;
+    }
+    public int getlevelPlayer()
+    {
+        return levelPlayer;
+    }
+    public bool[] getlevelUnclockedPlayer()
+    {
+        return levelUnclocked;
+    }
+    public float[] getTime()
+    {
+        return time;
+    }
+    public string getNick()
+    { 
+        return nick;
+    }
+    public int[] getControlerSelected()
+    {
+        return controlSelected;
+    }
+    public int[] getHighestScore()
+    {
+        return highestScore;
+    }
+
+
+
     void SetGameState(GameState newGameState)
     {
         currentGameState = newGameState;
         inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
         pauseCanvas.enabled = (currentGameState == GameState.GS_PAUSEMENU);
         levelCompletedCanvas.enabled = (currentGameState == GameState.GS_LEVELCOMPLETED);
+        gameOverCanvas.enabled = (currentGameState == GameState.GS_GAME_OVER);
         if(currentGameState == GameState.GS_LEVELCOMPLETED)
         {
             Scene currentScene = SceneManager.GetActiveScene();
@@ -143,6 +223,18 @@ public class GameManager : MonoBehaviour
     public void LevelCompleted()
     {
         SetGameState(GameState.GS_LEVELCOMPLETED);
+        Debug.Log("By³o bronze: " + generalBronzeCoins + " silver: " + generalSilverCoins + "gold: " + generalGoldCoins);
+        generalBronzeCoins += coinBronze;
+        generalSilverCoins += coinSilver;
+        generalGoldCoins += coinGold;
+        Debug.Log("Dodano: " + coinBronze + " " + coinSilver + " " + coinGold);
+        Debug.Log("Jest bronze: " + generalBronzeCoins + " silver: " + generalSilverCoins + "gold: " + generalGoldCoins);
+        time[SelectLevel.selected] = timer;
+        controlSelected[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
+        highestScore[SelectLevel.selected] = 123;
+
+
+        SaveSystem.SavePlayer(this);
     }
 
     public void OnResumeButtonClick()
