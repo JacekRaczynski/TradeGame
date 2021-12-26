@@ -12,6 +12,7 @@ TagManager:
   - CoinSilver
   - CoinGold
   - Kill
+  - DeadLine
   layers:
   - Default
   - TransparentFX

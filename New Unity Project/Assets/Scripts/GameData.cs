@@ -28,12 +28,12 @@ public class GameData
     }
     public void loadGameData()
     {
-        Debug.Log("AAAAAaa"+ generalBronzeCoins + generalSilverCoins + generalGoldCoins + level + levelUnclocked+time + nick + controlSelected + highestScore);
+     if(GameManager.instance != null)
         GameManager.instance.setData(generalBronzeCoins, generalSilverCoins, generalGoldCoins, level, levelUnclocked, time,nick,controlSelected,highestScore);
     }
     public string ToString()
     {
-        return generalBronzeCoins + generalSilverCoins + generalGoldCoins + level + levelUnclocked.ToString() + time+nick + controlSelected.ToString() + highestScore.ToString();
+        return "Coin: bronze: "+ generalBronzeCoins + " silver: "+ generalSilverCoins + " gold: " + generalGoldCoins+ "| level: " + level +" | unlockedLvls: "+ levelUnclocked.ToString() + " | times: " +  time + " | nick: " + nick + " | Control Selected : " + controlSelected.ToString() + " | Hightest score : " + highestScore.ToString();
     }
 
 }

@@ -148,6 +148,13 @@ public class PlayerControllerLevel1 : PlayerController
             GameManager.instance.addKeys();
             other.gameObject.SetActive(false);
         }
+        else if (other.CompareTag("Kill"))
+        {
+            GameManager.instance.subTractLives();
+        }  else if (other.CompareTag("DeadLine"))
+        {
+            GameManager.instance.GameOver();
+        }
         else if (other.CompareTag("Exit"))
         {
         if(GameManager.instance.keysCompleted)
@@ -198,12 +205,10 @@ public class PlayerControllerLevel1 : PlayerController
 
     public void setLeftClicked(bool clicked)
     {
-        Debug.Log("Left " + clicked);
         leftClicked = clicked;
     }
     public void setRightClicked(bool clicked)
     {
-        Debug.Log("right " + clicked);
         rightClicked = clicked;
     }
 

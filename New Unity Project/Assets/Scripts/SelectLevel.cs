@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 public class SelectLevel : MonoBehaviour
 {
@@ -20,7 +20,9 @@ public class SelectLevel : MonoBehaviour
     private Sprite[] images = new Sprite[GameManager.levelNumber];
     [SerializeField]
     private string[] description = new string[GameManager.levelNumber];
-    public enum enumProvince{
+    public static int selected;
+    public enum enumProvince
+    {
         POMORSKIE = 0,
         WARMIÑSKO_MAZURSKIE = 1,
         PODLASKIE = 2,
@@ -48,8 +50,34 @@ public class SelectLevel : MonoBehaviour
         showImage.sprite = images[index];
         Debug.Log(showDescription.text);
         showDescription.text = description[index];
+        if(GameManager.instance != null )
         colorUnlocked.color = GameManager.instance.getlevelUnclockedPlayer()[index] ? Color.green : Color.green;
+  
+        selected = index;
 
+    }
+   
+    public IEnumerator StartGame(string levelName)
+    {
+        yield return new WaitForSeconds(0.12f);
+        SceneManager.LoadScene(levelName);
+    }
+    public void StartLevel()
+    {
+        switch (selected)
+        {
+            case 0:
+                Debug.Log("Start Level1");
+                StartCoroutine(StartGame("Level1"));
+                break;
+            case 1:
+                Debug.Log("Start Level2");
+                StartCoroutine(StartGame("Level2"));
+                break;
+            default:
+                print("Incorrect number level.");
+                break;
+        }
     }
 }
 

@@ -23,15 +23,21 @@ public class MainMenu : MonoBehaviour
     [SerializeField]
     private TMPro.TextMeshProUGUI generalGoldCoinsText;
 
-    private void Start()
+    private void Awake()
     {
+   
+
         load();
         selectControl();
         settingsCanvas.enabled = false;
         controlCanvas.enabled = false;
         highestScoreCanvas.enabled = false;
         selectLevelCanvas.enabled = false;
-        //  Debug.Log("Loaded data from memory/aaaaaa/");// + highestScoreCanvas.enabled + controlCanvas.enabled + highestScoreCanvas.enabled);
+        Debug.Log("Loaded data from memory/aaaaaa/");// + highestScoreCanvas.enabled + controlCanvas.enabled + highestScoreCanvas.enabled);
+    }
+    private void Start()
+    {
+
         dropDown.onValueChanged.AddListener(delegate { selectControl(); });
     }
     public IEnumerator StartGame(string levelName)
@@ -57,6 +63,7 @@ public class MainMenu : MonoBehaviour
     {
         mainMenuCanvas.enabled = highestScoreCanvas.isActiveAndEnabled;
         highestScoreCanvas.enabled = !highestScoreCanvas.isActiveAndEnabled;
+
     }
     public void showSelectLevel()
     {
@@ -82,10 +89,12 @@ public class MainMenu : MonoBehaviour
     }
     public void updateGeneralCoins()
     {
-        generalBronzeCoinsText.text = GameManager.instance.getGeneralBronzeCoins().ToString();
-        generalSilverCoinsText.text = GameManager.instance.getGeneralSilverCoins().ToString();
-        generalGoldCoinsText.text = GameManager.instance.getGeneralGoldCoins().ToString();
-    }
+        
+            generalBronzeCoinsText.text = GameManager.instance.getGeneralBronzeCoins().ToString();
+            generalSilverCoinsText.text = GameManager.instance.getGeneralSilverCoins().ToString();
+            generalGoldCoinsText.text = GameManager.instance.getGeneralGoldCoins().ToString();
+     }
+    
 
     public void onLevelButton2Pressed()
     {
