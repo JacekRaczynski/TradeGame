@@ -9294,6 +9294,7 @@ MonoBehaviour:
   timesText: {fileID: 1462975007}
   highScoreText: {fileID: 817373104}
   ScoreText: {fileID: 571054929}
+  handleSystem: {fileID: 11400000, guid: 540ba3c7f47de0a439c682c599aad93d, type: 2}
   keysCompleted: 0
   keysTab:
   - {fileID: 1029612177}

@@ -328,15 +328,16 @@
 "Assets/Scripts/FallingPlatform.cs"
 "Assets/Scripts/GameData.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/HandleSystem.cs"
 "Assets/Scripts/HighestScoreTable.cs"
 "Assets/Scripts/JoystickClickTracker.cs"
 "Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/MoveByTouch.cs"
 "Assets/Scripts/MovingPlatform.cs"
-"Assets/Scripts/PlayerController.cs"
 "Assets/Scripts/PlayerControllerLevel1.cs"
 "Assets/Scripts/SaveSystem.cs"
 "Assets/Scripts/SelectLevel.cs"
+"Assets/Scripts/TradeManager.cs"
 -langversion:8.0
 
 /deterministic

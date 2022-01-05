@@ -29,7 +29,8 @@ public class GameManager : MonoBehaviour
     private TMPro.TextMeshProUGUI highScoreText; //highest score on this lvl
     [SerializeField]
     private TMPro.TextMeshProUGUI ScoreText; //score by lvl
-
+    [SerializeField]
+    private HandleSystem handleSystem;
     private int coinBronze = 0;
     private int coinSilver = 0;
     private int coinGold = 0;
@@ -59,6 +60,7 @@ public class GameManager : MonoBehaviour
     private float timer = 0;
     void Start()
     {
+        handleSystem.setUp();
         SaveSystem.LoadPlayer();
         for (int i = keys; i < keysTab.Length; i++)
             keysTab[i].color = Color.grey;

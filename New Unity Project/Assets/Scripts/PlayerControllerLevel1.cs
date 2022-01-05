@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerLevel1 : PlayerController
+public class PlayerControllerLevel1 : MonoBehaviour
 {
     private float moveSpeed = 6f;
     private float jumpForce = 6f;
