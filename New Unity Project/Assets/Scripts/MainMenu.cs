@@ -67,8 +67,10 @@ public class MainMenu : MonoBehaviour
     }
     public void showSelectLevel()
     {
+        updateGeneralCoins();
         mainMenuCanvas.enabled = selectLevelCanvas.isActiveAndEnabled;
         selectLevelCanvas.enabled = !selectLevelCanvas.isActiveAndEnabled;
+       
     }
     public void selectControl()
     {
@@ -108,6 +110,10 @@ public class MainMenu : MonoBehaviour
     public void reset()
     {
         SaveSystem.resetPlayer();
+        updateGeneralCoins();
+    }
+    public void OnEnable()
+    {
         updateGeneralCoins();
     }
     public void OnExit()

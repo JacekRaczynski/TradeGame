@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameData
 {
     private string nick;
+    private string ID;
     private int generalBronzeCoins;
     private int generalSilverCoins;
     private int generalGoldCoins;
@@ -25,15 +26,16 @@ public class GameData
         controlSelected = game.getControlerSelected();
         highestScore = game.getHighestScore();
         nick = game.getNick();
+        ID = game.getId();
     }
     public void loadGameData()
     {
      if(GameManager.instance != null)
-        GameManager.instance.setData(generalBronzeCoins, generalSilverCoins, generalGoldCoins, level, levelUnclocked, time,nick,controlSelected,highestScore);
+        GameManager.instance.setData(generalBronzeCoins, generalSilverCoins, generalGoldCoins, level, levelUnclocked, time,nick,controlSelected,highestScore,ID );
     }
     public string ToString()
     {
-        return "Coin: bronze: "+ generalBronzeCoins + " silver: "+ generalSilverCoins + " gold: " + generalGoldCoins+ "| level: " + level +" | unlockedLvls: "+ levelUnclocked.ToString() + " | times: " +  time + " | nick: " + nick + " | Control Selected : " + controlSelected.ToString() + " | Hightest score : " + highestScore.ToString();
+        return "Coin: bronze: "+ generalBronzeCoins + " silver: "+ generalSilverCoins + " gold: " + generalGoldCoins+ "| level: " + level +" | unlockedLvls: "+ levelUnclocked.ToString() + " | times: " +  time + " | nick: " + nick + " | Control Selected : " + controlSelected.ToString() + " | Hightest score : " + highestScore.ToString() +" id user: "+ ID;
     }
 
 }

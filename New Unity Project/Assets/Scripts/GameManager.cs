@@ -38,10 +38,12 @@ public class GameManager : MonoBehaviour
     private int keys = 0;
     private int maxKey = 3;
     private string nick;
+    private string Id;
     private int generalBronzeCoins;
     private int generalSilverCoins;
     private int generalGoldCoins;
     private int levelPlayer;
+   
     private bool[] levelUnclocked = new bool[levelNumber];
     private float[] time = new float[levelNumber];
     private int[] controlSelected = new int[levelNumber];
@@ -135,31 +137,44 @@ public class GameManager : MonoBehaviour
         livesTab[lives].enabled = false;
         if (lives == 0) GameOver();
     }
-    public void setData(int bronzeCoin, int silverCoin, int goldCoin, int levelPlayer, bool[] levelCompleted, float[] time, string nick,int[] controlSelected, int[] highestScore)
+    public void setData(int bronzeCoin, int silverCoin, int goldCoin, int levelPlayer, bool[] levelCompleted, float[] time, string nick,int[] controlSelected, int[] highestScore, string id)
     {
         Debug.Log("SetData");
-        this.generalBronzeCoins = bronzeCoin;
-        this.generalSilverCoins = silverCoin;
-        this.generalGoldCoins = goldCoin;
+        this.generalBronzeCoins = bronzeCoin+100;
+        this.generalSilverCoins = silverCoin+100;
+        this.generalGoldCoins = goldCoin+100;
         this.levelPlayer = levelPlayer;
         this.levelUnclocked = levelCompleted;
         this.time = time;
         this.nick = nick;
         this.controlSelected = controlSelected;
         this.highestScore = highestScore;
+        this.Id = Id;
 }
 
     public int getGeneralBronzeCoins()
     {
         return generalBronzeCoins;
     }   
+    public void setGenrealBronzeCoins(int setCoin)
+    {
+        generalBronzeCoins = setCoin;
+    }
     public int getGeneralSilverCoins()
     {
         return generalSilverCoins;
-    }   
+    }
+    public void setGenrealSilverCoins(int setCoin)
+    {
+        generalSilverCoins = setCoin;
+    }
     public int getGeneralGoldCoins()
     {
         return generalGoldCoins;
+    }
+    public void setGenrealGoldCoins(int setCoin)
+    {
+        generalGoldCoins = setCoin;
     }
     public int getlevelPlayer()
     {
@@ -176,6 +191,10 @@ public class GameManager : MonoBehaviour
     public string getNick()
     { 
         return nick;
+    }
+    public string getId()
+    {
+        return Id;
     }
     public int[] getControlerSelected()
     {
