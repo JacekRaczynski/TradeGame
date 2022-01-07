@@ -37,6 +37,7 @@ public class GameManager : MonoBehaviour
     private int lives = 3;
     private int keys = 0;
     private int maxKey = 3;
+    private int score = 0 ;
     private string nick;
     private string Id;
     private int generalBronzeCoins;
@@ -149,7 +150,7 @@ public class GameManager : MonoBehaviour
         this.nick = nick;
         this.controlSelected = controlSelected;
         this.highestScore = highestScore;
-        this.Id = Id;
+        this.Id = id;
 }
 
     public int getGeneralBronzeCoins()
@@ -192,9 +193,17 @@ public class GameManager : MonoBehaviour
     { 
         return nick;
     }
+    public void setNick(string nick)
+    {
+        this.nick = nick;
+    }
     public string getId()
     {
         return Id;
+    }
+    public void setId(string id)
+    {
+        this.Id = id;
     }
     public int[] getControlerSelected()
     {
@@ -217,14 +226,7 @@ public class GameManager : MonoBehaviour
         if(currentGameState == GameState.GS_LEVELCOMPLETED)
         {
             Scene currentScene = SceneManager.GetActiveScene();
-            if(currentScene.name == "Level1")
-            {
-                int score = 100;
-                if(score> PlayerPrefs.GetInt("HighscoreLevel1"))
-                    PlayerPrefs.SetInt("HighscoreLevel1", score);
-                highScoreText.text = "Highscore:" + PlayerPrefs.GetInt("HighscoreLevel1");
-                ScoreText.text = "score:" + score;
-            }
+       
         }
     }    
 
@@ -250,9 +252,18 @@ public class GameManager : MonoBehaviour
         generalGoldCoins += coinGold;
         Debug.Log("Dodano: " + coinBronze + " " + coinSilver + " " + coinGold);
         Debug.Log("Jest bronze: " + generalBronzeCoins + " silver: " + generalSilverCoins + "gold: " + generalGoldCoins);
-        time[SelectLevel.selected] = timer;
-        controlSelected[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
-        highestScore[SelectLevel.selected] = 123;
+        score = coinBronze + coinSilver * 10 + coinGold * 100 + lives * 100 +(int) Mathf.Floor(100 - timer);
+        if (levelPlayer < SelectLevel.selected) levelPlayer = SelectLevel.selected;
+        if (highestScore[SelectLevel.selected] <= score)
+        {
+            Debug.Log("RECORD! Aktualnie zdobyte punkty: " + score + " poprzednio: " + highestScore[SelectLevel.selected]);
+            time[SelectLevel.selected] = timer;
+            controlSelected[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
+            highestScore[SelectLevel.selected] = 123;
+            highScoreText.text = "Highscore:" + score;
+            ScoreText.text = "score:" + score;
+            levelUnclocked[SelectLevel.selected] = true;
+        }
 
 
         SaveSystem.SavePlayer(this);

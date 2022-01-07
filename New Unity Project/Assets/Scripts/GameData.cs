@@ -31,7 +31,7 @@ public class GameData
     public void loadGameData()
     {
      if(GameManager.instance != null)
-        GameManager.instance.setData(generalBronzeCoins, generalSilverCoins, generalGoldCoins, level, levelUnclocked, time,nick,controlSelected,highestScore,ID );
+        GameManager.instance.setData(generalBronzeCoins, generalSilverCoins, generalGoldCoins, level, levelUnclocked, time,nick,controlSelected,highestScore,ID);
     }
     public string ToString()
     {

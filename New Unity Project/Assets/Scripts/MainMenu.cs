@@ -8,10 +8,12 @@ using UnityEngine.UI;
 public class MainMenu : MonoBehaviour
 {
     public Canvas mainMenuCanvas;
+    public Canvas registerCanvas;
     public Canvas settingsCanvas;
     public Canvas controlCanvas;
     public Canvas selectLevelCanvas;
     public Canvas highestScoreCanvas;
+    public Canvas sureCanvas;
     public TMP_Dropdown dropDown;
     public Image imageControlArrows;
     public Image imageControlJoystick;
@@ -22,6 +24,10 @@ public class MainMenu : MonoBehaviour
     private TMPro.TextMeshProUGUI generalSilverCoinsText;
     [SerializeField]
     private TMPro.TextMeshProUGUI generalGoldCoinsText;
+    public TMPro.TextMeshProUGUI nick;
+    public TMPro.TextMeshProUGUI lvl;
+    public TMP_InputField nickInput;
+
 
     private void Awake()
     {
@@ -29,12 +35,27 @@ public class MainMenu : MonoBehaviour
 
         load();
         selectControl();
+        if (GameManager.instance.getId() == "" || GameManager.instance.getId() == null)
+        {
+            registerCanvas.enabled = true;
+            mainMenuCanvas.enabled = false;
+        }
+        else
+        {
+            nick.text = GameManager.instance.getNick();
+            lvl.text = GameManager.instance.getlevelPlayer().ToString();
+        }
         settingsCanvas.enabled = false;
         controlCanvas.enabled = false;
         highestScoreCanvas.enabled = false;
         selectLevelCanvas.enabled = false;
+        sureCanvas.enabled = false;
         Debug.Log("Loaded data from memory/aaaaaa/");// + highestScoreCanvas.enabled + controlCanvas.enabled + highestScoreCanvas.enabled);
+        for (int i = 0; i < GameManager.instance.getlevelUnclockedPlayer().Length; i++)
+            Debug.Log(i + " " + GameManager.instance.getlevelUnclockedPlayer()[i]);
     }
+
+
     private void Start()
     {
 
@@ -54,7 +75,11 @@ public class MainMenu : MonoBehaviour
         mainMenuCanvas.enabled = settingsCanvas.isActiveAndEnabled;
         settingsCanvas.enabled = !settingsCanvas.isActiveAndEnabled; 
     }
-      public void showControl()
+    public void showSure()
+    {
+        sureCanvas.enabled = !sureCanvas.isActiveAndEnabled;
+    }
+    public void showControl()
     {
         mainMenuCanvas.enabled = controlCanvas.isActiveAndEnabled;
         controlCanvas.enabled = !controlCanvas.isActiveAndEnabled; 
@@ -72,6 +97,7 @@ public class MainMenu : MonoBehaviour
         selectLevelCanvas.enabled = !selectLevelCanvas.isActiveAndEnabled;
        
     }
+
     public void selectControl()
     {
         PlayerPrefs.SetInt("Control", dropDown.value);
@@ -102,6 +128,19 @@ public class MainMenu : MonoBehaviour
     {
         StartCoroutine(StartGame("Level2"));
     }
+    public void register()
+    {
+        if (nickInput.text != "")
+        {
+            registerCanvas.enabled = false;
+            mainMenuCanvas.enabled = true;
+            GameManager.instance.setNick(nickInput.text);
+            Debug.Log(Random.Range(0, 10000000));
+            GameManager.instance.setId(Random.Range(0, 10000000).ToString());
+            nick.text = GameManager.instance.getNick();
+            SaveSystem.SavePlayer(GameManager.instance);
+        }
+    }
     public void load()
     {
         SaveSystem.LoadPlayer();
@@ -111,6 +150,11 @@ public class MainMenu : MonoBehaviour
     {
         SaveSystem.resetPlayer();
         updateGeneralCoins();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+
+        Application.Quit();
     }
     public void OnEnable()
     {

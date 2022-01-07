@@ -24,7 +24,6 @@ public static class SaveSystem
         {
             BinaryFormatter formatter = new BinaryFormatter();
             FileStream stream = new FileStream(path, FileMode.Open);
-           //sad
             GameData data = formatter.Deserialize(stream) as GameData;
             data.loadGameData();
             stream.Close();

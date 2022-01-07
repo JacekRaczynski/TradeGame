@@ -22,6 +22,7 @@ public class SelectLevel : MonoBehaviour
     private string[] description = new string[16];
     public static int selected;
     public TradeManager tradeManager;
+    public Button start;
     public enum enumProvince
     {
         POMORSKIE = 0,
@@ -40,6 +41,10 @@ public class SelectLevel : MonoBehaviour
         ZACHODNIOPOMORSKIE = 13,
         KUJAWSKO_POMORSKIE = 14,
         LUBUSKIE = 15,
+    }
+    public void OnAwake()
+    {
+        start.interactable = false;
     }
 
     public void Select(int index)
@@ -61,6 +66,9 @@ public class SelectLevel : MonoBehaviour
         tradeManager.StoG.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
         tradeManager.GtoB.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
         tradeManager.GtoS.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        if (index < GameManager.instance.getlevelPlayer() + 2)
+            start.interactable = true;
+        else start.interactable = false;
     }
     public IEnumerator StartGame(string levelName)
     {
