@@ -141,11 +141,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5744}
     - Class: 114
-      Script: {instanceID: 6432}
+      Script: {instanceID: 6434}
     - Class: 114
-      Script: {instanceID: 6732}
+      Script: {instanceID: 6734}
     - Class: 114
-      Script: {instanceID: 7072}
+      Script: {instanceID: 7074}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -246,11 +246,11 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 5744}
     - Class: 114
-      Script: {instanceID: 6432}
+      Script: {instanceID: 6434}
     - Class: 114
-      Script: {instanceID: 6732}
+      Script: {instanceID: 6734}
     - Class: 114
-      Script: {instanceID: 7072}
+      Script: {instanceID: 7074}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -351,9 +351,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 6144}
     - Class: 114
-      Script: {instanceID: 6524}
+      Script: {instanceID: 6526}
     - Class: 114
-      Script: {instanceID: 6742}
+      Script: {instanceID: 6744}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -385,7 +385,7 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: 3f4fb5785792d3cf095f28d48ca33d2d
+      Hash: 9dbb86533a49d105e3adf817a88a1add
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MainMenu
@@ -517,7 +517,7 @@ ScriptsOnlyBuild:
     className: TimelineAsset
   - hash:
       serializedVersion: 2
-      Hash: dd7a01902190b652e2e6a8374309e9d7
+      Hash: 066a24e07ae9e1060d0ccdfc904fc2bf
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TradeManager
@@ -709,7 +709,7 @@ ScriptsOnlyBuild:
     className: HandleSystem
   - hash:
       serializedVersion: 2
-      Hash: 0ddbd759b2463d85c4937e0b628a4807
+      Hash: 0b52095bb7081a3d4a94dd252eb8bfef
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SelectLevel
@@ -1081,6 +1081,12 @@ ScriptsOnlyBuild:
     className: PositionAsUV1
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NewBehaviourScript1
+  - hash:
+      serializedVersion: 2
       Hash: 87ff43d2baf3385cba327d8f803a4ebb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1207,6 +1213,12 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: NewBehaviourScript
+  - hash:
+      serializedVersion: 2
       Hash: 8220b46879dc5e37db1b940c938f5744
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1240,4 +1252,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Level1.unity
   - Assets/Scenes/MainMenu.unity
   - Assets/Scenes/Level2.unity
-  playerPath: D:/Buildy pracy inz/build7.apk
+  playerPath: D:/Buildy pracy inz/build8.apk

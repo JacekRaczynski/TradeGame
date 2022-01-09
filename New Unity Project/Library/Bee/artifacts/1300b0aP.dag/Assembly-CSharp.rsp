@@ -300,6 +300,8 @@
 "Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/MoveByTouch.cs"
 "Assets/Scripts/MovingPlatform.cs"
+"Assets/Scripts/NewBehaviourScript.cs"
+"Assets/Scripts/NewBehaviourScript1.cs"
 "Assets/Scripts/PlayerControllerLevel1.cs"
 "Assets/Scripts/SaveSystem.cs"
 "Assets/Scripts/SelectLevel.cs"

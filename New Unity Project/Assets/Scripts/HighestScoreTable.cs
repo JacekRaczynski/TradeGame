@@ -6,18 +6,43 @@ public class HighestScoreTable : MonoBehaviour
 {
     private Transform entryContainer;
     private Transform entryTemplate;
-
+    private float templateHight;
     private void Start()
     {
         entryContainer = transform.Find("highestScoreEntryContainer");
         entryTemplate = transform.Find("highestScoreEntryTemplate");
         entryTemplate.gameObject.SetActive(false);
-        float templateHight = 30f;
+        templateHight = 30f;
+        setValue(PlayerPrefs.GetInt("Control", 0));
+
+    }
+    public void setValue(int index)
+        {
         if (GameManager.instance != null)
         {
-            int[] controledSelected = GameManager.instance.getControlerSelected();
-            float[] time = GameManager.instance.getTime();
-            int[] highestScore = GameManager.instance.getHighestScore();
+            int[] controledSelected;
+            float[] time;
+            int[] highestScore;
+            if (index == 0)
+            {
+                controledSelected = GameManager.instance.getControlerSelected();
+                time = GameManager.instance.getTime();
+                highestScore = GameManager.instance.getHighestScore();
+            }
+            else if (index == 1)
+            {
+                controledSelected = GameManager.instance.getControlerSelected1();
+                time = GameManager.instance.getTime1();
+                highestScore = GameManager.instance.getHighestScore1();
+            }
+          else
+            {
+                controledSelected = GameManager.instance.getControlerSelected2();
+                time = GameManager.instance.getTime2();
+                highestScore = GameManager.instance.getHighestScore2();
+            }
+
+
             for (int i = 0; i < GameManager.levelNumber; i++)
             {
 
@@ -40,5 +65,7 @@ public class HighestScoreTable : MonoBehaviour
             }
         }
     }
+
+
     
 }

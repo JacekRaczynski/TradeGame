@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     public TMP_Dropdown dropDown;
     public Image imageControlArrows;
     public Image imageControlJoystick;
+    public Image imageControlArea;
     public TMPro.TextMeshProUGUI textSelectedControl;
     [SerializeField]
     private TMPro.TextMeshProUGUI generalBronzeCoinsText;
@@ -31,7 +32,8 @@ public class MainMenu : MonoBehaviour
 
     private void Awake()
     {
-   
+        if (GameManager.instance == null)
+            GameManager.instance = new GameManager();
 
         load();
         selectControl();
@@ -44,6 +46,8 @@ public class MainMenu : MonoBehaviour
         {
             nick.text = GameManager.instance.getNick();
             lvl.text = GameManager.instance.getlevelPlayer().ToString();
+
+            registerCanvas.enabled = false;
         }
         settingsCanvas.enabled = false;
         controlCanvas.enabled = false;
@@ -106,13 +110,22 @@ public class MainMenu : MonoBehaviour
              {
                 imageControlArrows.enabled = true;
                 imageControlJoystick.enabled = false;
+                imageControlArea.enabled = false;
                 textSelectedControl.text = dropDown.options[0].text;
             }
             else if (dropDown.value == 1)
             {
-                imageControlArrows.enabled = false;
+            imageControlArrows.enabled = false;
+                imageControlArea.enabled = false;
                 imageControlJoystick.enabled = true;
                 textSelectedControl.text = dropDown.options[1].text;
+            }
+            else if (dropDown.value == 2)
+            {
+            imageControlArrows.enabled = false;
+                imageControlJoystick.enabled = false;
+                imageControlArea.enabled = true;
+            textSelectedControl.text = dropDown.options[2].text;
             }
     }
     public void updateGeneralCoins()

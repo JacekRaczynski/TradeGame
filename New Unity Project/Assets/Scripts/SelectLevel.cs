@@ -23,6 +23,11 @@ public class SelectLevel : MonoBehaviour
     public static int selected;
     public TradeManager tradeManager;
     public Button start;
+
+    public Image star;
+    public Image star1;
+    public Image star2;
+
     public enum enumProvince
     {
         POMORSKIE = 0,
@@ -45,6 +50,9 @@ public class SelectLevel : MonoBehaviour
     public void OnAwake()
     {
         start.interactable = false;
+        star.enabled = false;
+        star1.enabled = false;
+        star2.enabled = false;
     }
 
     public void Select(int index)
@@ -69,6 +77,15 @@ public class SelectLevel : MonoBehaviour
         if (index < GameManager.instance.getlevelPlayer() + 2)
             start.interactable = true;
         else start.interactable = false;
+        if (GameManager.instance.getHighestScore()[index] > 0)
+            star.enabled = true;
+        else star.enabled = false;
+        if (GameManager.instance.getHighestScore1()[index] > 0)
+            star1.enabled = true;
+        else star1.enabled = false;
+        if (GameManager.instance.getHighestScore2()[index] > 0)
+            star2.enabled = true;
+        else star2.enabled = false;
     }
     public IEnumerator StartGame(string levelName)
     {

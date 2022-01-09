@@ -49,6 +49,13 @@ public class GameManager : MonoBehaviour
     private float[] time = new float[levelNumber];
     private int[] controlSelected = new int[levelNumber];
     private int[] highestScore = new int[levelNumber];
+    private float[] time1 = new float[levelNumber];
+    private int[] controlSelected1 = new int[levelNumber];
+    private int[] highestScore1 = new int[levelNumber];
+    private float[] time2 = new float[levelNumber];
+    private int[] controlSelected2 = new int[levelNumber];
+    private int[] highestScore2 = new int[levelNumber];
+
 
 
     public static int levelNumber = 10;
@@ -75,13 +82,27 @@ public class GameManager : MonoBehaviour
         {
             GameObject.Find("ControlArrows").active = true;
             GameObject.Find("ControlJoystick").active = false;
+            GameObject.Find("ControlArea").active = false;
         } else if (PlayerPrefs.GetInt("Control", 0) == 1)
         {
             GameObject.Find("ControlArrows").active = false;
             GameObject.Find("ControlJoystick").active = true;
+            GameObject.Find("ControlArea").active = false;
+        }
+        else if (PlayerPrefs.GetInt("Control", 0) == 2)
+        {
+            GameObject.Find("ControlArrows").active = false;
+            GameObject.Find("ControlJoystick").active = false;
+            GameObject.Find("ControlArea").active = true;
         }
     }
- 
+        public GameManager()
+    { 
+       int generalBronzeCoins = 0;
+       int generalSilverCoins = 0;
+       int generalGoldCoins = 0;
+
+}
     private void Awake()
     {
         instance = this;
@@ -138,7 +159,8 @@ public class GameManager : MonoBehaviour
         livesTab[lives].enabled = false;
         if (lives == 0) GameOver();
     }
-    public void setData(int bronzeCoin, int silverCoin, int goldCoin, int levelPlayer, bool[] levelCompleted, float[] time, string nick,int[] controlSelected, int[] highestScore, string id)
+    public void setData(int bronzeCoin, int silverCoin, int goldCoin, int levelPlayer, bool[] levelCompleted, float[] time, string nick,int[] controlSelected, int[] highestScore, string id
+        , float[] time1, int[] controlSelected1, int[] highestScore1, float[] time2, int[] controlSelected2, int[] highestScore2)
     {
         Debug.Log("SetData");
         this.generalBronzeCoins = bronzeCoin+100;
@@ -146,10 +168,17 @@ public class GameManager : MonoBehaviour
         this.generalGoldCoins = goldCoin+100;
         this.levelPlayer = levelPlayer;
         this.levelUnclocked = levelCompleted;
-        this.time = time;
+     
         this.nick = nick;
+        this.time = time;
         this.controlSelected = controlSelected;
         this.highestScore = highestScore;
+        this.time1 = time1;
+        this.controlSelected1 = controlSelected1;
+        this.highestScore1 = highestScore1;
+        this.time2 = time2;
+        this.controlSelected2 = controlSelected2;
+        this.highestScore2 = highestScore2;
         this.Id = id;
 }
 
@@ -189,6 +218,14 @@ public class GameManager : MonoBehaviour
     {
         return time;
     }
+    public float[] getTime1()
+    {
+        return time1;
+    }
+    public float[] getTime2()
+    {
+        return time2;
+    }
     public string getNick()
     { 
         return nick;
@@ -209,15 +246,32 @@ public class GameManager : MonoBehaviour
     {
         return controlSelected;
     }
+    public int[] getControlerSelected1()
+    {
+        return controlSelected1;
+    }
+    public int[] getControlerSelected2()
+    {
+        return controlSelected2;
+    }
     public int[] getHighestScore()
     {
         return highestScore;
+    }
+    public int[] getHighestScore1()
+    {
+        return highestScore1;
+    }
+    public int[] getHighestScore2()
+    {
+        return highestScore2;
     }
 
 
 
     void SetGameState(GameState newGameState)
     {
+        Debug.Log("SSS"+newGameState);
         currentGameState = newGameState;
         inGameCanvas.enabled = (currentGameState == GameState.GS_GAME);
         pauseCanvas.enabled = (currentGameState == GameState.GS_PAUSEMENU);
@@ -253,24 +307,58 @@ public class GameManager : MonoBehaviour
         Debug.Log("Dodano: " + coinBronze + " " + coinSilver + " " + coinGold);
         Debug.Log("Jest bronze: " + generalBronzeCoins + " silver: " + generalSilverCoins + "gold: " + generalGoldCoins);
         score = coinBronze + coinSilver * 10 + coinGold * 100 + lives * 100 +(int) Mathf.Floor(100 - timer);
-        if (levelPlayer < SelectLevel.selected) levelPlayer = SelectLevel.selected;
-        if (highestScore[SelectLevel.selected] <= score)
+      
+      switch(PlayerPrefs.GetInt("Control", 0))
         {
-            Debug.Log("RECORD! Aktualnie zdobyte punkty: " + score + " poprzednio: " + highestScore[SelectLevel.selected]);
-            time[SelectLevel.selected] = timer;
-            controlSelected[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
-            highestScore[SelectLevel.selected] = 123;
-            highScoreText.text = "Highscore:" + score;
-            ScoreText.text = "score:" + score;
+            case 0:
+                if (highestScore[SelectLevel.selected] ==null || highestScore[SelectLevel.selected] <= score)
+                {
+                    Debug.Log("RECORD! Aktualnie zdobyte punkty: " + score + " poprzednio: " + highestScore[SelectLevel.selected]);
+                    time[SelectLevel.selected] = timer;
+                    controlSelected[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
+                    highestScore[SelectLevel.selected] = score;
+                    highScoreText.text = "Highscore:" + score;
+                }
+                ScoreText.text = "score:" + score;
+                break;
+            case 1:
+                if (highestScore1[SelectLevel.selected] == null || highestScore1[SelectLevel.selected] <= score)
+                {
+                    Debug.Log("RECORD! Aktualnie zdobyte punkty: " + score + " poprzednio: " + highestScore1[SelectLevel.selected]);
+                    time1[SelectLevel.selected] = timer;
+                    controlSelected1[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
+                    highestScore1[SelectLevel.selected] = score;
+                    highScoreText.text = "Highscore:" + score;
+                }
+                ScoreText.text = "score:" + score;
+                break;
+            case 2:
+                if (highestScore2[SelectLevel.selected] == null || highestScore[SelectLevel.selected] <= score)
+                {
+                    Debug.Log("RECORD! Aktualnie zdobyte punkty: " + score + " poprzednio: " + highestScore2[SelectLevel.selected]);
+                    time2[SelectLevel.selected] = timer;
+                    controlSelected2[SelectLevel.selected] = PlayerPrefs.GetInt("Control", 0);
+                    highestScore2[SelectLevel.selected] = score;
+                    highScoreText.text = "Highscore:" + score;
+                }
+                ScoreText.text = "score:" + score;
+                break;
+
+        }
+        if (highestScore[SelectLevel.selected] > 0 &&
+              highestScore1[SelectLevel.selected] > 0 &&
+                 highestScore2[SelectLevel.selected] > 0)
+        {
             levelUnclocked[SelectLevel.selected] = true;
+            if (levelPlayer < SelectLevel.selected) levelPlayer = SelectLevel.selected;
         }
 
-
-        SaveSystem.SavePlayer(this);
+            SaveSystem.SavePlayer(this);
     }
 
     public void OnResumeButtonClick()
     {
+        Debug.Log("SSS4");
         InGame();
     }
     public void OnRestartButtonClicked()

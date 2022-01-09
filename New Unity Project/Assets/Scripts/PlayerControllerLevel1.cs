@@ -116,8 +116,41 @@ public class PlayerControllerLevel1 : MonoBehaviour
                         }
                             break;
                         }
+                case 2:
+                    {
+                        if (!rightClicked && !leftClicked)
+                        {
 
-                }
+                            isWalking = false;
+                            isLock = false;
+                        }
+
+                        else
+                        {
+                            if (Input.GetKey(KeyCode.RightArrow) || rightClicked)
+                            {
+                                isMovingRight = true;
+                                if (!isFacingRight)
+                                    flip();
+                                transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
+                                isWalking = true;
+                                isLock = true;
+                            }
+                            if (Input.GetKey(KeyCode.LeftArrow) || leftClicked)
+                            {
+                                isMovingRight = false;
+                                if (isFacingRight)
+                                    flip();
+                                transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
+                                isWalking = true;
+                                isLock = true;
+
+                            }
+                        }
+                        break;
+                    }
+
+            }
         }
     }
 
