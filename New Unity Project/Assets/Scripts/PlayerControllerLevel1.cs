@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerLevel1 : PlayerController
+public class PlayerControllerLevel1 : MonoBehaviour
 {
     private float moveSpeed = 6f;
     private float jumpForce = 6f;
@@ -23,7 +23,8 @@ public class PlayerControllerLevel1 : PlayerController
     private bool isLock;
     private bool leftClicked;
     private bool rightClicked;
-
+    [Range(0.0f, 10.0f)]
+    public float slider;
    
 
 
@@ -40,19 +41,29 @@ public class PlayerControllerLevel1 : PlayerController
     {
         rigidbody = GetComponent<Rigidbody>();
         isGround = true;
-   
+
     }
+
     // Update is called once per frame
     void Update()
     {
+        Vector3 ve = new Vector3();
+        ve.z = 0;
+        ve.x = 1;
+        ve.y = -1;
+        Debug.DrawRay(transform.position, Vector3.down*1f);
+       // isGround = 
+     
         animator.SetBool("isGround", isGround);
         animator.SetBool("isWalking", isWalking);
         if (IsGrounded())
         {
+            Debug.Log("111111");
             isGround = true;
-            canDoubleJump= false;
+            canDoubleJump = false;
             animator.SetBool("isGround", true);
         }
+        else isGround = false;
         if (GameManager.instance.currentGameState == GameManager.GameState.GS_GAME)
         {
                 switch (PlayerPrefs.GetInt("Control", 0))
@@ -97,7 +108,7 @@ public class PlayerControllerLevel1 : PlayerController
                             isMovingRight = true;
                             if (!isFacingRight)
                                 flip();
-                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 25, Space.World);
+                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 120, Space.World);
                             isWalking = true;
                             isLock = true;
                         }
@@ -106,7 +117,7 @@ public class PlayerControllerLevel1 : PlayerController
                             isMovingRight = false;
                             if (isFacingRight)
                                 flip();
-                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 25, Space.World);
+                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 120, Space.World);
                             isWalking = true;
                             isLock = true;
                         }
@@ -116,8 +127,41 @@ public class PlayerControllerLevel1 : PlayerController
                         }
                             break;
                         }
+                case 2:
+                    {
+                        if (!rightClicked && !leftClicked)
+                        {
 
-                }
+                            isWalking = false;
+                            isLock = false;
+                        }
+
+                        else
+                        {
+                            if (Input.GetKey(KeyCode.RightArrow) || rightClicked)
+                            {
+                                isMovingRight = true;
+                                if (!isFacingRight)
+                                    flip();
+                                transform.Translate(0.0f, 0.0f, MoveSpeed * Time.deltaTime, Space.World);
+                                isWalking = true;
+                                isLock = true;
+                            }
+                            if (Input.GetKey(KeyCode.LeftArrow) || leftClicked)
+                            {
+                                isMovingRight = false;
+                                if (isFacingRight)
+                                    flip();
+                                transform.Translate(0.0f, 0.0f, -MoveSpeed * Time.deltaTime, Space.World);
+                                isWalking = true;
+                                isLock = true;
+
+                            }
+                        }
+                        break;
+                    }
+
+            }
         }
     }
 
@@ -167,29 +211,36 @@ public class PlayerControllerLevel1 : PlayerController
     }
     public void Jump()
     {
-        {
-            if (!isGround && canDoubleJump)
+        if (!isGround && canDoubleJump)
             {
                 DoubleJump();
             }
-            if (isGround && !canDoubleJump)
+            if ( isGround && !canDoubleJump)
             {
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                canDoubleJump = true;
-                isGround = IsGrounded();
-            }
-
+          
+            isGround = false;
+            StartCoroutine(ExampleCoroutine());
+            canDoubleJump = true;
         }
+
     }
-    private bool IsGrounded()
+    IEnumerator ExampleCoroutine()
     {
-        return Physics.Raycast(this.transform.position, Vector3.down, 0.2f, groundLayer.value);
+        yield return new WaitForSeconds(0.2f);
+        canDoubleJump = true;
     }
+        private bool IsGrounded()
+    {
+
+        return !Physics.Raycast(this.transform.position, Vector3.down, 2f, groundLayer.value);
+          }
+ 
     private void DoubleJump()
     {
         if(canDoubleJump)
         {
-            rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            rigidbody.AddForce(Vector3.up * jumpForce/2, ForceMode.Impulse);
             canDoubleJump = false;
         }
     }

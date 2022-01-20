@@ -17,10 +17,17 @@ public class SelectLevel : MonoBehaviour
     [SerializeField]
     private Image colorUnlocked;
     [SerializeField]
-    private Sprite[] images = new Sprite[GameManager.levelNumber];
+    private Sprite[] images = new Sprite[16];
     [SerializeField]
-    private string[] description = new string[GameManager.levelNumber];
+    private string[] description = new string[16];
     public static int selected;
+    public TradeManager tradeManager;
+    public Button start;
+
+    public Image star;
+    public Image star1;
+    public Image star2;
+
     public enum enumProvince
     {
         POMORSKIE = 0,
@@ -40,6 +47,15 @@ public class SelectLevel : MonoBehaviour
         KUJAWSKO_POMORSKIE = 14,
         LUBUSKIE = 15,
     }
+   
+    public void Awake()
+    {
+        start.interactable = false;
+        star.enabled = false;
+        star1.enabled = false;
+        star2.enabled = false;
+    }
+  
 
     public void Select(int index)
     {
@@ -51,12 +67,28 @@ public class SelectLevel : MonoBehaviour
         Debug.Log(showDescription.text);
         showDescription.text = description[index];
         if(GameManager.instance != null )
-        colorUnlocked.color = GameManager.instance.getlevelUnclockedPlayer()[index] ? Color.green : Color.green;
-  
+        colorUnlocked.color = GameManager.instance.getlevelUnclockedPlayer()[index] ? Color.green : Color.black;
         selected = index;
-
+        tradeManager.exchange();
+        tradeManager.BtoS.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        tradeManager.BtoG.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        tradeManager.StoB.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        tradeManager.StoG.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        tradeManager.GtoB.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        tradeManager.GtoS.interactable = GameManager.instance.getlevelUnclockedPlayer()[index];
+        if (index < GameManager.instance.getlevelPlayer() + 2)
+            start.interactable = true;
+        else start.interactable = false;
+        if (GameManager.instance.getHighestScore()[index] > 0)
+            star.enabled = true;
+        else star.enabled = false;
+        if (GameManager.instance.getHighestScore1()[index] > 0)
+            star1.enabled = true;
+        else star1.enabled = false;
+        if (GameManager.instance.getHighestScore2()[index] > 0)
+            star2.enabled = true;
+        else star2.enabled = false;
     }
-   
     public IEnumerator StartGame(string levelName)
     {
         yield return new WaitForSeconds(0.12f);
@@ -79,7 +111,12 @@ public class SelectLevel : MonoBehaviour
                 break;
         }
     }
+    private void Update()
+    {
+       // if(selected = 0)
+    }
 }
+
 
 public class Province
 {
