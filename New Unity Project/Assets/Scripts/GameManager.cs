@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
        int generalSilverCoins = 0;
        int generalGoldCoins = 0;
 
+
 }
     private void Awake()
     {
@@ -214,6 +215,10 @@ public class GameManager : MonoBehaviour
     public int getlevelPlayer()
     {
         return levelPlayer;
+    }
+    public void setlevelPlayer(int lvl)
+    {
+         levelPlayer = lvl;
     }
     public bool[] getlevelUnclockedPlayer()
     {

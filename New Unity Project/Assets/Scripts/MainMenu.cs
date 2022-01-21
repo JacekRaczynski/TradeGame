@@ -67,8 +67,9 @@ public class MainMenu : MonoBehaviour
     }
     public IEnumerator StartGame(string levelName)
     {
-        yield return new WaitForSeconds(0.12f);
+    
         SceneManager.LoadScene(levelName);
+        yield return new WaitForSeconds(0.12f);
     }
     public void onLevelButton1Pressed()
     {
@@ -148,6 +149,7 @@ public class MainMenu : MonoBehaviour
             registerCanvas.enabled = false;
             mainMenuCanvas.enabled = true;
             GameManager.instance.setNick(nickInput.text);
+            GameManager.instance.setlevelPlayer(-1);
             Debug.Log(Random.Range(0, 10000000));
             GameManager.instance.setId(Random.Range(0, 10000000).ToString());
             nick.text = GameManager.instance.getNick();

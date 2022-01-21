@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,7 @@ public class HighestScoreTable : MonoBehaviour
     private Transform entryContainer;
     private Transform entryTemplate;
     private float templateHight;
+    private static List<Transform> list = new List<Transform>();
     private void Start()
     {
         entryContainer = transform.Find("highestScoreEntryContainer");
@@ -41,12 +43,26 @@ public class HighestScoreTable : MonoBehaviour
                 time = GameManager.instance.getTime2();
                 highestScore = GameManager.instance.getHighestScore2();
             }
+            try
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+
+                    GameObject.Destroy(list[i]);
+                }
+            }
+            catch (Exception e)
+            {
+                print("error");
+
+            }
 
 
             for (int i = 0; i < GameManager.levelNumber; i++)
             {
 
                 Transform entryTransform = Instantiate(entryTemplate, this.gameObject.transform);
+                list.Add(entryTransform);
                 RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
                 entryRectTransform.anchoredPosition = new Vector2(0, -templateHight * i);
 

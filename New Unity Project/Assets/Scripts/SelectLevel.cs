@@ -91,8 +91,8 @@ public class SelectLevel : MonoBehaviour
     }
     public IEnumerator StartGame(string levelName)
     {
-        yield return new WaitForSeconds(0.12f);
         SceneManager.LoadScene(levelName);
+        yield return new WaitForSeconds(0.12f);
     }
     public void StartLevel()
     {
