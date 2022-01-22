@@ -151,7 +151,9 @@ public class GameManager : MonoBehaviour
     }
     public void addLives()
     {
+        livesTab[lives].enabled = true;
         lives++;
+        
     }
     public void addKeys()
     {

@@ -23,6 +23,7 @@ public class SelectLevel : MonoBehaviour
     public static int selected;
     public TradeManager tradeManager;
     public Button start;
+    public Button buy;
 
     public Image star;
     public Image star1;
@@ -54,11 +55,17 @@ public class SelectLevel : MonoBehaviour
         star.enabled = false;
         star1.enabled = false;
         star2.enabled = false;
+        buy.interactable =false;
     }
   
 
     public void Select(int index)
     {
+        if (index <= GameManager.instance.getlevelPlayer())
+        {
+            buy.interactable = true;
+        }
+        else buy.interactable = false;
         var province = EventSystem.current.currentSelectedGameObject;
 
         showTitle.text = province.name;

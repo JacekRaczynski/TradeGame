@@ -47,18 +47,31 @@ public class PlayerControllerLevel1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 ve = new Vector3();
-        ve.z = 0;
-        ve.x = 1;
-        ve.y = -1;
-        Debug.DrawRay(transform.position, Vector3.down*1f);
-       // isGround = 
-     
+        float dlug = 0.01f;
+        Debug.DrawRay(transform.position, Vector3.down* dlug);
+        Debug.DrawRay(transform.position, new Vector3(0,-1,-1)* dlug);
+        Debug.DrawRay(transform.position, new Vector3(0,-1,1)* dlug);
+        Debug.DrawRay(transform.position+ new Vector3(0,0,0.3f), new Vector3(0, -1, -1) * dlug);
+        Debug.DrawRay(transform.position+ new Vector3(0,0,-0.3f), new Vector3(0, -1, 1) * dlug);
+        Debug.DrawRay(transform.position+ new Vector3(0,0,0.3f), Vector3.down* dlug);
+        Debug.DrawRay(transform.position+ new Vector3(0,0,-0.3f), Vector3.down* dlug);
+        Debug.Log(
+            Physics.Raycast(transform.position, Vector3.down * dlug, groundLayer.value)+" "+
+            Physics.Raycast(transform.position, new Vector3(0, -1, -1) * dlug, groundLayer.value)+" "+
+            Physics.Raycast(transform.position, new Vector3(0, -1, 1) * dlug, groundLayer.value)+" "+
+            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), new Vector3(0, -1, -1) * dlug, groundLayer.value)+" "+
+            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), new Vector3(0, -1, 1) * dlug, groundLayer.value)+" "+
+            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), Vector3.down * dlug, groundLayer.value)+" "+
+            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), Vector3.down * dlug, groundLayer.value)+" "
+          
+            );
+        // isGround = 
+       // Physics.Raycast(this.transform.position, Vector3.down, 2f, groundLayer.value);
+
         animator.SetBool("isGround", isGround);
         animator.SetBool("isWalking", isWalking);
         if (IsGrounded())
         {
-            Debug.Log("111111");
             isGround = true;
             canDoubleJump = false;
             animator.SetBool("isGround", true);
@@ -66,6 +79,8 @@ public class PlayerControllerLevel1 : MonoBehaviour
         else isGround = false;
         if (GameManager.instance.currentGameState == GameManager.GameState.GS_GAME)
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+                Jump();
                 switch (PlayerPrefs.GetInt("Control", 0))
                 {
                     case 0:
@@ -232,8 +247,19 @@ public class PlayerControllerLevel1 : MonoBehaviour
     }
         private bool IsGrounded()
     {
+        float dlug = 0.01f;
 
-        return !Physics.Raycast(this.transform.position, Vector3.down, 2f, groundLayer.value);
+        return !(
+            
+      //Physics.Raycast(transform.position, Vector3.down * dlug, groundLayer.value) ||
+            Physics.Raycast(transform.position, new Vector3(0, -1, -1) * dlug, groundLayer.value) ||
+            Physics.Raycast(transform.position, new Vector3(0, -1, 1) * dlug, groundLayer.value) ||
+            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), new Vector3(0, -1, -1) * dlug, groundLayer.value) ||
+            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), new Vector3(0, -1, 1) * dlug, groundLayer.value) 
+      //    Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), Vector3.down * dlug, groundLayer.value) ||
+     //     Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), Vector3.down * dlug, groundLayer.value)
+
+            );
           }
  
     private void DoubleJump()

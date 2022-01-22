@@ -74,12 +74,13 @@ public class TradeManager : MonoBehaviour
         GtoS.interactable = false;
         deposit.interactable = false;
         slider.interactable = false;
-
-        }
+    }
     public void OnSelected(string selected)
     {
-        deposit.interactable = true;
-        slider.interactable = true;
+    
+            deposit.interactable = true;
+            slider.interactable = true;
+      
         switch (selected)
         {
             case "BtoS":
@@ -321,8 +322,4 @@ public class TradeManager : MonoBehaviour
       
     }
 
-    void Update()
-    {
-        
-    }
 }

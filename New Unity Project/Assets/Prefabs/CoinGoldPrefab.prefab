@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6366769904891722564}
   m_Layer: 0
   m_Name: CoinGoldPrefab
-  m_TagString: CoinSilver
+  m_TagString: CoinGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 3133384236385163028}
   m_Layer: 6
   m_Name: coin
-  m_TagString: Coin
+  m_TagString: CoinGold
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

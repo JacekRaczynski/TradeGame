@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12922,6 +12922,7 @@ MonoBehaviour:
   timesText: {fileID: 0}
   highScoreText: {fileID: 0}
   ScoreText: {fileID: 0}
+  NextLevel: {fileID: 0}
   handleSystem: {fileID: 0}
   star: {fileID: 0}
   star1: {fileID: 0}
@@ -16053,6 +16054,7 @@ MonoBehaviour:
     dorobku naukowym."
   tradeManager: {fileID: 1476376846}
   start: {fileID: 1730232371}
+  buy: {fileID: 738046665}
   star: {fileID: 418782287}
   star1: {fileID: 950982422}
   star2: {fileID: 37323276}
