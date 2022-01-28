@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4252484657894556004}
   - component: {fileID: 4827451795276560378}
   - component: {fileID: 4033114475599735589}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1113087117613308417}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: platform2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 924976372383726510}
   - component: {fileID: 6521161417433111085}
   - component: {fileID: 2924994677639498045}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Kostka.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}

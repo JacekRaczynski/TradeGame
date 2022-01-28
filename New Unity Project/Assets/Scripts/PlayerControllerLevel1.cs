@@ -25,7 +25,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
     private bool rightClicked;
     [Range(0.0f, 10.0f)]
     public float slider;
-   
+    public float obr;
 
 
     public float MoveSpeed { get => moveSpeed; set => moveSpeed = value; }
@@ -48,25 +48,15 @@ public class PlayerControllerLevel1 : MonoBehaviour
     void Update()
     {
         float dlug = 0.01f;
-        Debug.DrawRay(transform.position, Vector3.down* dlug);
-        Debug.DrawRay(transform.position, new Vector3(0,-1,-1)* dlug);
-        Debug.DrawRay(transform.position, new Vector3(0,-1,1)* dlug);
-        Debug.DrawRay(transform.position+ new Vector3(0,0,0.3f), new Vector3(0, -1, -1) * dlug);
-        Debug.DrawRay(transform.position+ new Vector3(0,0,-0.3f), new Vector3(0, -1, 1) * dlug);
-        Debug.DrawRay(transform.position+ new Vector3(0,0,0.3f), Vector3.down* dlug);
-        Debug.DrawRay(transform.position+ new Vector3(0,0,-0.3f), Vector3.down* dlug);
-        Debug.Log(
-            Physics.Raycast(transform.position, Vector3.down * dlug, groundLayer.value)+" "+
-            Physics.Raycast(transform.position, new Vector3(0, -1, -1) * dlug, groundLayer.value)+" "+
-            Physics.Raycast(transform.position, new Vector3(0, -1, 1) * dlug, groundLayer.value)+" "+
-            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), new Vector3(0, -1, -1) * dlug, groundLayer.value)+" "+
-            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), new Vector3(0, -1, 1) * dlug, groundLayer.value)+" "+
-            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), Vector3.down * dlug, groundLayer.value)+" "+
-            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), Vector3.down * dlug, groundLayer.value)+" "
-          
-            );
+        Debug.DrawRay(transform.position, new Vector3(0,-1,-1)* obr);
+        Debug.DrawRay(transform.position, new Vector3(0,-1,1)* obr);
+        Debug.DrawRay(transform.position+ new Vector3(0,0,0.3f), new Vector3(0, -1, -1) * obr);
+        Debug.DrawRay(transform.position+ new Vector3(0,0,-0.3f), new Vector3(0, -1, 1) * obr);
+
+
+
         // isGround = 
-       // Physics.Raycast(this.transform.position, Vector3.down, 2f, groundLayer.value);
+        // Physics.Raycast(this.transform.position, Vector3.down, 2f, groundLayer.value);
 
         animator.SetBool("isGround", isGround);
         animator.SetBool("isWalking", isWalking);
@@ -248,14 +238,13 @@ public class PlayerControllerLevel1 : MonoBehaviour
         private bool IsGrounded()
     {
         float dlug = 0.01f;
-
         return !(
             
       //Physics.Raycast(transform.position, Vector3.down * dlug, groundLayer.value) ||
-            Physics.Raycast(transform.position, new Vector3(0, -1, -1) * dlug, groundLayer.value) ||
-            Physics.Raycast(transform.position, new Vector3(0, -1, 1) * dlug, groundLayer.value) ||
-            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), new Vector3(0, -1, -1) * dlug, groundLayer.value) ||
-            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), new Vector3(0, -1, 1) * dlug, groundLayer.value) 
+            Physics.Raycast(transform.position, new Vector3(0, -1, -1) * dlug,obr, groundLayer.value) ||
+            Physics.Raycast(transform.position, new Vector3(0, -1, 1) * dlug,obr, groundLayer.value) ||
+            Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), new Vector3(0, -1, -1) * dlug, obr, groundLayer.value) ||
+            Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), new Vector3(0, -1, 1) * dlug, obr, groundLayer.value) 
       //    Physics.Raycast(transform.position + new Vector3(0, 0, 0.3f), Vector3.down * dlug, groundLayer.value) ||
      //     Physics.Raycast(transform.position + new Vector3(0, 0, -0.3f), Vector3.down * dlug, groundLayer.value)
 

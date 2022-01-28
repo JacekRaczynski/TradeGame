@@ -77,7 +77,10 @@ public class GameManager : MonoBehaviour
         handleSystem.setUp();
         SaveSystem.LoadPlayer();
         for (int i = keys; i < keysTab.Length; i++)
+        {
+            Debug.Log(i);
             keysTab[i].color = Color.grey;
+        }
         for (int i = 0; i < lives; i++)
             livesTab[i].enabled = true;
         for (int i = lives; i < livesTab.Length; i++)
@@ -171,9 +174,9 @@ public class GameManager : MonoBehaviour
         , float[] time1, int[] controlSelected1, int[] highestScore1, float[] time2, int[] controlSelected2, int[] highestScore2)
     {
         Debug.Log("SetData");
-        this.generalBronzeCoins = bronzeCoin+100;
-        this.generalSilverCoins = silverCoin+100;
-        this.generalGoldCoins = goldCoin+100;
+        this.generalBronzeCoins = bronzeCoin;
+        this.generalSilverCoins = silverCoin;
+        this.generalGoldCoins = goldCoin;
         this.levelPlayer = levelPlayer;
         this.levelUnclocked = levelCompleted;
      
@@ -190,10 +193,14 @@ public class GameManager : MonoBehaviour
         this.Id = id;
 }
 
+    public int getlives()
+    {
+        return lives;
+    }
     public int getGeneralBronzeCoins()
     {
         return generalBronzeCoins;
-    }   
+    }
     public void setGenrealBronzeCoins(int setCoin)
     {
         generalBronzeCoins = setCoin;

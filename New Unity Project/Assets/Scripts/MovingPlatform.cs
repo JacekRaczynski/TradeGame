@@ -50,7 +50,7 @@ public class MovingPlatform : MonoBehaviour
             if (other.transform.position.y < transformPlatformY)
             {
                 player = playerTrigger;
-                player.MoveSpeed /= 2;
+                player.MoveSpeed /= 1.5f;
             }
 
         }
@@ -60,7 +60,7 @@ public class MovingPlatform : MonoBehaviour
         var playerTrigger = other.GetComponent<PlayerControllerLevel1>();
         if (playerTrigger != null && player != null)
         {
-            player.MoveSpeed *= 2;
+            player.MoveSpeed *= 1.5f;
             player = null; 
         }
 

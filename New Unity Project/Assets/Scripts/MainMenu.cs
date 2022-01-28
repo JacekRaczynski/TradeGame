@@ -73,7 +73,7 @@ public class MainMenu : MonoBehaviour
     }
     public void onLevelButton1Pressed()
     {
-        StartCoroutine(StartGame("Level1"));
+        StartCoroutine(StartGame("Level0"));
     }
     public void showSettings()
     {

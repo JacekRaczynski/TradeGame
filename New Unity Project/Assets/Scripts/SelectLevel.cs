@@ -106,12 +106,20 @@ public class SelectLevel : MonoBehaviour
         switch (selected)
         {
             case 0:
+                Debug.Log("Start Level0");
+                StartCoroutine(StartGame("Level0"));
+                break;
+            case 1:
                 Debug.Log("Start Level1");
                 StartCoroutine(StartGame("Level1"));
                 break;
-            case 1:
+            case 2:
                 Debug.Log("Start Level2");
                 StartCoroutine(StartGame("Level2"));
+                break;
+            case 3:
+                Debug.Log("Start Level3");
+                StartCoroutine(StartGame("Level3"));
                 break;
             default:
                 print("Incorrect number level.");
