@@ -12,7 +12,6 @@ public class TradeManager : MonoBehaviour
     public TextAsset csvFileBronze;
     public TextAsset csvFileSilver;
     public TextAsset csvFileGold;
-    public int [] tempTraderPrice = new int[GameManager.levelNumber];
     public const float mutationValue = 0.4f;
     public const float changePrice= 2f;
 
@@ -150,7 +149,7 @@ public class TradeManager : MonoBehaviour
                 //GtoS.isOn = false;
                 break;
         }
- 
+        Debug.Log("COOOO JHEST");
         exchange();
         maxValue.text = slider.maxValue.ToString();
 
@@ -208,6 +207,11 @@ public class TradeManager : MonoBehaviour
             }
             withdraw.text = exchangeOut.ToString();
             Debug.Log("SelectLevel.selected: " + SelectLevel.selected + " |  GameManager.instance.getlevelPlayer(): "+ GameManager.instance.getlevelPlayer());
+        }
+        else
+        {
+            exchangeOut = 0;
+            withdraw.text = "0";
         }
     }
 
@@ -286,6 +290,7 @@ public class TradeManager : MonoBehaviour
                     silverPriceTable.Price[SelectLevel.selected * GameManager.levelNumber + GameManager.instance.getlevelPlayer()] *= (1 + Mathf.Log(exchangeOut * changePrice) / 10);
                     break;
             }
+            SaveSystem.SavePlayer(GameManager.instance);
             OnEnable();
         }
     }

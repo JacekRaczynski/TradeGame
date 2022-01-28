@@ -47,8 +47,13 @@ public class HighestScoreTable : MonoBehaviour
             {
                 for (int i = 0; i < list.Count; i++)
                 {
+                    Debug.Log(list.Count);
+                    //   GameObject.Destroy(list[i].gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>().gameObject);
+                    //GameObject.Destroy(list[i].gameObject.GetComponent<RectTransform>().gameObject);
+                    //  GameObject.Destroy(list[i].gameObject);
+                    list[i].gameObject.SetActive(false); //works
 
-                    GameObject.Destroy(list[i]);
+               //     Destroy((list[i].gameObject));
                 }
             }
             catch (Exception e)

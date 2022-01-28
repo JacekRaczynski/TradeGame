@@ -360,7 +360,7 @@ public class GameManager : MonoBehaviour
                 highScoreText.text = "Highscore:" + highestScore1[SelectLevel.selected];
                 break;
             case 2:
-                if (highestScore2[SelectLevel.selected] == null || highestScore[SelectLevel.selected] <= score)
+                if (highestScore2[SelectLevel.selected] == null || highestScore2[SelectLevel.selected] <= score)
                 {
                     Debug.Log("RECORD! Aktualnie zdobyte punkty: " + score + " poprzednio: " + highestScore2[SelectLevel.selected]);
                     time2[SelectLevel.selected] = timer;
@@ -371,6 +371,7 @@ public class GameManager : MonoBehaviour
                 ScoreText.text = "score:" + score;
                 highScoreText.text = "Highscore:" + highestScore2[SelectLevel.selected];
                 break;
+       
 
         }
         if (highestScore[SelectLevel.selected] > 0) star.enabled = true;

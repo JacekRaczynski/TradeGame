@@ -15651,7 +15651,6 @@ MonoBehaviour:
   csvFileBronze: {fileID: 4900000, guid: 29655848b2b01314f927c3747d7db760, type: 3}
   csvFileSilver: {fileID: 4900000, guid: 3e6cc4ec6d00a2e419f0649cb3280e7e, type: 3}
   csvFileGold: {fileID: 4900000, guid: 07c305ba4e7fdd94c9ac1cf267cdcf8a, type: 3}
-  tempTraderPrice: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
   BtoS: {fileID: 1404847174}
   BtoG: {fileID: 937606072}
   StoB: {fileID: 395963155}
