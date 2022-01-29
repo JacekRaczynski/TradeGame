@@ -48,11 +48,15 @@ public class HighestScoreTable : MonoBehaviour
                 for (int i = 0; i < list.Count; i++)
                 {
                     Debug.Log(list.Count);
+                    list[i].Find("lvlText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                    list[i].Find("controlText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                    list[i].Find("timeText").GetComponent<TMPro.TextMeshProUGUI>().text = "";
+                    list[i].Find("highestScore").GetComponent<TMPro.TextMeshProUGUI>().text = "";
                     //   GameObject.Destroy(list[i].gameObject.GetComponentInChildren<TMPro.TextMeshProUGUI>().gameObject);
                     //GameObject.Destroy(list[i].gameObject.GetComponent<RectTransform>().gameObject);
                     //  GameObject.Destroy(list[i].gameObject);
-                    list[i].gameObject.SetActive(false); //works
-
+                    //  list[i].gameObject.SetActive(false); //works
+                    Destroy(list[i].Find("highestScoreEntryTemplate(Clone)"));
                //     Destroy((list[i].gameObject));
                 }
             }

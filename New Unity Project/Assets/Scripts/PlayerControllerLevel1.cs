@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControllerLevel1 : MonoBehaviour
 {
-    private float moveSpeed = 6f;
+    private float moveSpeed = 5f;
     private float jumpForce = 6f;
     private float killOffset = 0.3f;
     private Rigidbody rigidbody;
@@ -113,7 +113,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
                             isMovingRight = true;
                             if (!isFacingRight)
                                 flip();
-                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 120, Space.World);
+                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 28, Space.World);
                             isWalking = true;
                             isLock = true;
                         }
@@ -122,7 +122,7 @@ public class PlayerControllerLevel1 : MonoBehaviour
                             isMovingRight = false;
                             if (isFacingRight)
                                 flip();
-                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 120, Space.World);
+                            transform.Translate(0.0f, 0.0f, MoveSpeed * joystick.GetInputAxis().x / 28, Space.World);
                             isWalking = true;
                             isLock = true;
                         }

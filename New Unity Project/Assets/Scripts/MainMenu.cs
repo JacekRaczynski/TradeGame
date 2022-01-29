@@ -45,8 +45,9 @@ public class MainMenu : MonoBehaviour
         else
         {
             nick.text = GameManager.instance.getNick();
+            
             lvl.text = GameManager.instance.getlevelPlayer().ToString();
-
+            if (GameManager.instance.getlevelPlayer() == -1) lvl.text = "0";
             registerCanvas.enabled = false;
         }
         settingsCanvas.enabled = false;

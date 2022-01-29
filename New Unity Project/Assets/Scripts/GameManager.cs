@@ -141,16 +141,17 @@ public class GameManager : MonoBehaviour
     public void addBronzeCoin()
     {
         coinBronze++;
-        coinsText.text = coinBronze.ToString();
+        coinsText.text = (coinBronze + coinSilver*10 + coinGold * 100).ToString();
     }
     public void addSilverCoin()
     {
         coinSilver++;
-
+        coinsText.text = (coinBronze + coinSilver * 10 + coinGold * 100).ToString();
     }
     public void addGoldCoin()
     {
         coinGold ++;
+        coinsText.text = (coinBronze + coinSilver * 10 + coinGold * 100).ToString();
     }
     public void addLives()
     {
@@ -408,9 +409,22 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-    public void OnNextLevelButtonClicked()
+    public void OnNextLevelButtonClicked(int i)
     {
-        SceneManager.LoadScene("Level 2");
+
+        switch (i)
+        {
+            case 0:
+                SceneManager.LoadScene("Level1");
+                break;
+            case 1:
+                SceneManager.LoadScene("Level2");
+                break;
+            case 2:
+                SceneManager.LoadScene("Level3");
+                break;
+        }
+    
     }
 
     public void OnExitButtonClicked()

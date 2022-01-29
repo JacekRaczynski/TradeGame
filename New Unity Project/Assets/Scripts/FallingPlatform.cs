@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FallingPlatform : MonoBehaviour
 {
-    float time = 1f;
+    public float time = 1f;
     Rigidbody rigidbody;
     void Start()
     {

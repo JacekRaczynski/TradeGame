@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 3408439872465562727}
   - component: {fileID: 483108511935117832}
   - component: {fileID: 3858084075117780888}
-  - component: {fileID: 1368212054599743726}
   - component: {fileID: 325185282296817352}
   m_Layer: 0
   m_Name: Walec
@@ -276,20 +275,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1368212054599743726
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6092473747728698717}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -3955282482629499392, guid: 2474a96d2e911a441825d84cd060a607, type: 3}
 --- !u!65 &325185282296817352
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -301,7 +286,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.052780345, y: 0.053276144, z: 0.012103265}
+  m_Size: {x: 0.052780345, y: 0.053276144, z: 0.01890327}
   m_Center: {x: 0.00010502815, y: 0.00012348413, z: -0.022410525}
 --- !u!1 &6461269039867611236
 GameObject:
