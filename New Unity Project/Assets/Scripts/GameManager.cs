@@ -345,8 +345,8 @@ public class GameManager : MonoBehaviour
                     highestScore[SelectLevel.selected] = score;
                
                 }
-                ScoreText.text = "score:" + score;
-                highScoreText.text = "Highscore:" + highestScore[SelectLevel.selected];
+                ScoreText.text = "wynik:" + score;
+                highScoreText.text = "Najlepszy Twój wynik:" + highestScore[SelectLevel.selected];
                 break;
             case 1:
                 if (highestScore1[SelectLevel.selected] == null || highestScore1[SelectLevel.selected] <= score)
@@ -357,8 +357,8 @@ public class GameManager : MonoBehaviour
                     highestScore1[SelectLevel.selected] = score;
                     highScoreText.text = "Highscore:" + score;
                 }
-                ScoreText.text = "score:" + score;
-                highScoreText.text = "Highscore:" + highestScore1[SelectLevel.selected];
+                ScoreText.text = "wynik:" + score;
+                highScoreText.text = "Najlepszy Twój wynik: " + highestScore1[SelectLevel.selected];
                 break;
             case 2:
                 if (highestScore2[SelectLevel.selected] == null || highestScore2[SelectLevel.selected] <= score)
@@ -369,8 +369,8 @@ public class GameManager : MonoBehaviour
                     highestScore2[SelectLevel.selected] = score;
                     highScoreText.text = "Highscore:" + score;
                 }
-                ScoreText.text = "score:" + score;
-                highScoreText.text = "Highscore:" + highestScore2[SelectLevel.selected];
+                ScoreText.text = "wynik:" + score;
+                highScoreText.text = "Najlepszy Twój wynik: " + highestScore2[SelectLevel.selected];
                 break;
        
 
